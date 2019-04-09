@@ -1,0 +1,116 @@
+﻿@model Demo.Models.PaperCriteriaConfigViewModel
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger
+        $('#ddlExamTypeID').change(function () {
+            alert('gesg');
+            $.ajax({
+                type: "post",
+                url: "/PaperCriteriaConfig/GetInstitutesByExamC",
+                data: { ExamTypeID: $('#ddlExamTypeID').val() },
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+                    var district = "<select id='ddlInstituteID'>";
+                    district = district + '<option value="">--Select--</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                    }
+                    district = district + '</select>';
+                    $('#District').html(district);
+                }
+            });
+        });
+    });
+</script> 
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Question Paper Criteria Configuration</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.ExamTypeID, new { @class = "mycombo" })
+                </div>
+                <div class="col-md-4">
+                    @*@Html.DropDownListFor(model => model.ExamTypeID, Model.ExamTypes, "--Select Exam--")*@
+
+                    @Html.DropDownListFor(x => x.ExamTypeID, Model.ExamTypes, "--Select--", new { @id = "ddlExamTypeID" }); 
+                    @Html.ValidationMessageFor(model => model.ExamTypeID)
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.InstituteID, new { @class = "mycombo" })
+                </div>
+                <div class="col-md-4">
+                    @*@Html.DropDownListFor(model => model.InstituteID, Model.Institutes, "--Select Institute--")*@
+                    @Html.DropDownListFor(x => x.InstituteID, new List<SelectListItem>(), "--Select--", new { @id = "ddlInstituteID" }); 
+                    @Html.ValidationMessageFor(model => model.InstituteID)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                
+            </div>
+        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DefaultCriteria, new { @class = "mycombo" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DefaultCriteria)
+                        @Html.ValidationMessageFor(model => model.DefaultCriteria)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SubjectID, new { @class = "mycombo" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SubjectID)
+                        @Html.ValidationMessageFor(model => model.SubjectID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SectionID, new { @class = "mycombo" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SectionID)
+                        @Html.ValidationMessageFor(model => model.SectionID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LessonID, new { @class = "mycombo" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LessonID)
+                        @Html.ValidationMessageFor(model => model.LessonID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TopicID, new { @class = "mycombo" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TopicID)
+                        @Html.ValidationMessageFor(model => model.TopicID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+
+

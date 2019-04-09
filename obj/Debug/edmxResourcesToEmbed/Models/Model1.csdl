@@ -1,0 +1,1289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_A46486_examModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="AnswerID" />
+    </Key>
+    <Property Name="AnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionID" Type="Int32" />
+    <Property Name="SeqOfAnswer" Type="Byte" />
+    <Property Name="AnswerText" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="AnswerImage" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="CorrectAnswer" Type="Boolean" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Question" Relationship="Self.FK__Answer__Question__619B8048" FromRole="Answer" ToRole="Question" />
+  </EntityType>
+  <EntityType Name="CandExamRegistration">
+    <Key>
+      <PropertyRef Name="CandExamRegistrationID" />
+    </Key>
+    <Property Name="CandExamRegistrationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InstituteID" Type="Int32" />
+    <Property Name="CandidateID" Type="Int32" Nullable="false" />
+    <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
+    <Property Name="ExamTypeID" Type="Int32" />
+    <Property Name="Token" Type="Guid" Nullable="false" />
+    <Property Name="TokenExpireTime" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Candidate" Relationship="Self.FK__CandExamR__Candi__628FA481" FromRole="CandExamRegistration" ToRole="Candidate" />
+    <NavigationProperty Name="ExamType" Relationship="Self.FK__CandExamR__ExamT__6383C8BA" FromRole="CandExamRegistration" ToRole="ExamType" />
+    <NavigationProperty Name="Institute" Relationship="Self.FK__CandExamR__Insti__6477ECF3" FromRole="CandExamRegistration" ToRole="Institute" />
+  </EntityType>
+  <EntityType Name="Candidate">
+    <Key>
+      <PropertyRef Name="CandidateID" />
+    </Key>
+    <Property Name="CandidateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AdharCardNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Photo" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CollegeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Class" Type="Int32" />
+    <Property Name="StateId" Type="Int32" />
+    <Property Name="InstituteId" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="CandExamRegistrations" Relationship="Self.FK__CandExamR__Candi__628FA481" FromRole="Candidate" ToRole="CandExamRegistration" />
+    <NavigationProperty Name="CandidateExamTypes" Relationship="Self.FK__Candidate__Candi__6754599E" FromRole="Candidate" ToRole="CandidateExamType" />
+    <NavigationProperty Name="Institute" Relationship="Self.FK__Candidate__Insti__656C112C" FromRole="Candidate" ToRole="Institute" />
+    <NavigationProperty Name="State" Relationship="Self.FK__Candidate__State__66603565" FromRole="Candidate" ToRole="State" />
+  </EntityType>
+  <EntityType Name="CandidateExamType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CandidateId" Type="Int32" Nullable="false" />
+    <Property Name="ExamTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Candidate" Relationship="Self.FK__Candidate__Candi__6754599E" FromRole="CandidateExamType" ToRole="Candidate" />
+    <NavigationProperty Name="ExamType" Relationship="Self.FK__Candidate__ExamT__68487DD7" FromRole="CandidateExamType" ToRole="ExamType" />
+  </EntityType>
+  <EntityType Name="CandQuestionPaperCriteria">
+    <Key>
+      <PropertyRef Name="CandQuestionPaperCriteriaID" />
+    </Key>
+    <Property Name="CandQuestionPaperCriteriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InstituteID" Type="Int32" />
+    <Property Name="CandidateID" Type="Int32" />
+    <Property Name="ExamTypeID" Type="Int32" />
+    <Property Name="QuesPaperDefaultCriteria" Type="Boolean" />
+    <Property Name="SubjectId" Type="Int32" />
+    <Property Name="SectionId" Type="Int32" />
+    <Property Name="LessonId" Type="Int32" />
+    <Property Name="TopicId" Type="Int32" />
+    <Property Name="Token" Type="Guid" Nullable="false" />
+    <Property Name="TokenExpireTime" Type="DateTime" Precision="3" />
+    <Property Name="QuestionPaperId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TotalNumberOfQuestions" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="ExamType" Relationship="Self.FK__CandQuest__ExamT__693CA210" FromRole="CandQuestionPaperCriteria" ToRole="ExamType" />
+    <NavigationProperty Name="Institute" Relationship="Self.FK__CandQuest__Insti__6A30C649" FromRole="CandQuestionPaperCriteria" ToRole="Institute" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ExamSchedule">
+    <Key>
+      <PropertyRef Name="ExamScheduleID" />
+    </Key>
+    <Property Name="ExamScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ExamDescription" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="ExamStartDate" Type="DateTime" Precision="0" />
+    <Property Name="ExamEndDate" Type="DateTime" Precision="0" />
+    <Property Name="ExamStartTime" Type="Time" Precision="4" />
+    <Property Name="ExamEndTime" Type="Time" Precision="4" />
+    <Property Name="DurationInMin" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ExamSubjectMapping">
+    <Key>
+      <PropertyRef Name="ExamSubjectMappingId" />
+    </Key>
+    <Property Name="ExamSubjectMappingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamTypeId" Type="Int32" Nullable="false" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="NoOfQuestions" Type="Int32" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ExamType" Relationship="Self.FK__ExamSubje__ExamT__6B24EA82" FromRole="ExamSubjectMapping" ToRole="ExamType" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__ExamSubje__Subje__6C190EBB" FromRole="ExamSubjectMapping" ToRole="Subject" />
+  </EntityType>
+  <EntityType Name="ExamType">
+    <Key>
+      <PropertyRef Name="ExamTypeID" />
+    </Key>
+    <Property Name="ExamTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="TotalNoOfQuestions" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="CandExamRegistrations" Relationship="Self.FK__CandExamR__ExamT__6383C8BA" FromRole="ExamType" ToRole="CandExamRegistration" />
+    <NavigationProperty Name="CandidateExamTypes" Relationship="Self.FK__Candidate__ExamT__68487DD7" FromRole="ExamType" ToRole="CandidateExamType" />
+    <NavigationProperty Name="CandQuestionPaperCriterias" Relationship="Self.FK__CandQuest__ExamT__693CA210" FromRole="ExamType" ToRole="CandQuestionPaperCriteria" />
+    <NavigationProperty Name="ExamSubjectMappings" Relationship="Self.FK__ExamSubje__ExamT__6B24EA82" FromRole="ExamType" ToRole="ExamSubjectMapping" />
+    <NavigationProperty Name="QuestionExamMappings" Relationship="Self.FK__QuestionE__ExamT__797309D9" FromRole="ExamType" ToRole="QuestionExamMapping" />
+  </EntityType>
+  <EntityType Name="Institute">
+    <Key>
+      <PropertyRef Name="InstituteID" />
+    </Key>
+    <Property Name="InstituteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InstituteName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="InstituteDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StateId" Type="Int32" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="CandExamRegistrations" Relationship="Self.FK__CandExamR__Insti__6477ECF3" FromRole="Institute" ToRole="CandExamRegistration" />
+    <NavigationProperty Name="Candidates" Relationship="Self.FK__Candidate__Insti__656C112C" FromRole="Institute" ToRole="Candidate" />
+    <NavigationProperty Name="CandQuestionPaperCriterias" Relationship="Self.FK__CandQuest__Insti__6A30C649" FromRole="Institute" ToRole="CandQuestionPaperCriteria" />
+    <NavigationProperty Name="State" Relationship="Self.FK__Institute__State__6D0D32F4" FromRole="Institute" ToRole="State" />
+  </EntityType>
+  <EntityType Name="Lesson">
+    <Key>
+      <PropertyRef Name="LessonID" />
+    </Key>
+    <Property Name="LessonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SectionID" Type="Int32" />
+    <Property Name="SubjectID" Type="Int32" />
+    <Property Name="LessonName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Section" Relationship="Self.FK__Lesson__SectionI__6E01572D" FromRole="Lesson" ToRole="Section" />
+    <NavigationProperty Name="Section1" Relationship="Self.FK__Lesson__SectionI__6EF57B66" FromRole="Lesson" ToRole="Section" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Lesson__SubjectI__6FE99F9F" FromRole="Lesson" ToRole="Subject" />
+    <NavigationProperty Name="Subject1" Relationship="Self.FK__Lesson__SubjectI__70DDC3D8" FromRole="Lesson" ToRole="Subject" />
+    <NavigationProperty Name="Questions" Relationship="Self.FK__Question__Lesson__72C60C4A" FromRole="Lesson" ToRole="Question" />
+  </EntityType>
+  <EntityType Name="MathsEquation">
+    <Key>
+      <PropertyRef Name="EquationID" />
+    </Key>
+    <Property Name="EquationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EquationFormula" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MenuList">
+    <Key>
+      <PropertyRef Name="MenuID" />
+    </Key>
+    <Property Name="MenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuParentID" Type="Int32" />
+    <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ControllerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ActionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__MenuList__RoleId__71D1E811" FromRole="MenuList" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="PermissionID" />
+    </Key>
+    <Property Name="PermissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PermissionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PermissionDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="RolePermissions" Relationship="Self.FK__RolePermi__Permi__7B5B524B" FromRole="Permission" ToRole="RolePermissions" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="QuestionID" />
+    </Key>
+    <Property Name="QuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubjectID" Type="Int32" />
+    <Property Name="SectionID" Type="Int32" />
+    <Property Name="LessonID" Type="Int32" />
+    <Property Name="TopicID" Type="Int32" />
+    <Property Name="QuestionTypeID" Type="Int32" />
+    <Property Name="QuesDiffLevelID" Type="Int32" />
+    <Property Name="QuestionText" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="QuestionImage" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="MarksForQuestion" Type="Int32" />
+    <Property Name="IsMultiSelect" Type="Boolean" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="QuestionSourceId" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Answers" Relationship="Self.FK__Answer__Question__619B8048" FromRole="Question" ToRole="Answer" />
+    <NavigationProperty Name="Lesson" Relationship="Self.FK__Question__Lesson__72C60C4A" FromRole="Question" ToRole="Lesson" />
+    <NavigationProperty Name="QuestionDiffLevel" Relationship="Self.FK__Question__QuesDi__73BA3083" FromRole="Question" ToRole="QuestionDiffLevel" />
+    <NavigationProperty Name="QuestionSource" Relationship="Self.FK__Question__Questi__74AE54BC" FromRole="Question" ToRole="QuestionSource" />
+    <NavigationProperty Name="QuestionType" Relationship="Self.FK__Question__Questi__75A278F5" FromRole="Question" ToRole="QuestionType" />
+    <NavigationProperty Name="Section" Relationship="Self.FK__Question__Sectio__76969D2E" FromRole="Question" ToRole="Section" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Question__Subjec__778AC167" FromRole="Question" ToRole="Subject" />
+    <NavigationProperty Name="Topic" Relationship="Self.FK__Question__TopicI__787EE5A0" FromRole="Question" ToRole="Topic" />
+    <NavigationProperty Name="QuestionExamMappings" Relationship="Self.FK__QuestionE__Quest__7A672E12" FromRole="Question" ToRole="QuestionExamMapping" />
+  </EntityType>
+  <EntityType Name="QuestionDiffLevel">
+    <Key>
+      <PropertyRef Name="QuesDiffLevelID" />
+    </Key>
+    <Property Name="QuesDiffLevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuesDiffLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="NoOfQuestionPercentage" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="NoOfQuestions" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Questions" Relationship="Self.FK__Question__QuesDi__73BA3083" FromRole="QuestionDiffLevel" ToRole="Question" />
+  </EntityType>
+  <EntityType Name="QuestionExamMapping">
+    <Key>
+      <PropertyRef Name="QuestionExamMappingId" />
+    </Key>
+    <Property Name="QuestionExamMappingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <Property Name="ExamTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ExamType" Relationship="Self.FK__QuestionE__ExamT__797309D9" FromRole="QuestionExamMapping" ToRole="ExamType" />
+    <NavigationProperty Name="Question" Relationship="Self.FK__QuestionE__Quest__7A672E12" FromRole="QuestionExamMapping" ToRole="Question" />
+  </EntityType>
+  <EntityType Name="QuestionPaperType">
+    <Key>
+      <PropertyRef Name="QuesPaperTypeID" />
+    </Key>
+    <Property Name="QuesPaperTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuesPaperType" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="QuestionSource">
+    <Key>
+      <PropertyRef Name="QuestionSourceID" />
+    </Key>
+    <Property Name="QuestionSourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionSource1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="NoOfQuestionPercentage" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Questions" Relationship="Self.FK__Question__Questi__74AE54BC" FromRole="QuestionSource" ToRole="Question" />
+  </EntityType>
+  <EntityType Name="QuestionType">
+    <Key>
+      <PropertyRef Name="QuestionTypeID" />
+    </Key>
+    <Property Name="QuestionTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionType1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Questions" Relationship="Self.FK__Question__Questi__75A278F5" FromRole="QuestionType" ToRole="Question" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoleDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="MenuLists" Relationship="Self.FK__MenuList__RoleId__71D1E811" FromRole="Role" ToRole="MenuList" />
+    <NavigationProperty Name="RolePermissions" Relationship="Self.FK__RolePermi__RoleI__7C4F7684" FromRole="Role" ToRole="RolePermissions" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__RoleI__02084FDA" FromRole="Role" ToRole="UserRoles" />
+  </EntityType>
+  <EntityType Name="RolePermission">
+    <Key>
+      <PropertyRef Name="RolePermissionID" />
+    </Key>
+    <Property Name="RolePermissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="Int32" />
+    <Property Name="PermissionId" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Permission" Relationship="Self.FK__RolePermi__Permi__7B5B524B" FromRole="RolePermissions" ToRole="Permission" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__RolePermi__RoleI__7C4F7684" FromRole="RolePermissions" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Section">
+    <Key>
+      <PropertyRef Name="SectionID" />
+    </Key>
+    <Property Name="SectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubjectID" Type="Int32" />
+    <Property Name="SectionName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Lessons" Relationship="Self.FK__Lesson__SectionI__6E01572D" FromRole="Section" ToRole="Lesson" />
+    <NavigationProperty Name="Lessons1" Relationship="Self.FK__Lesson__SectionI__6EF57B66" FromRole="Section" ToRole="Lesson" />
+    <NavigationProperty Name="Questions" Relationship="Self.FK__Question__Sectio__76969D2E" FromRole="Section" ToRole="Question" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Section__Subject__7D439ABD" FromRole="Section" ToRole="Subject" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateID" />
+    </Key>
+    <Property Name="StateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateDescription" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Candidates" Relationship="Self.FK__Candidate__State__66603565" FromRole="State" ToRole="Candidate" />
+    <NavigationProperty Name="Institutes" Relationship="Self.FK__Institute__State__6D0D32F4" FromRole="State" ToRole="Institute" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubjectName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="ExamSubjectMappings" Relationship="Self.FK__ExamSubje__Subje__6C190EBB" FromRole="Subject" ToRole="ExamSubjectMapping" />
+    <NavigationProperty Name="Lessons" Relationship="Self.FK__Lesson__SubjectI__6FE99F9F" FromRole="Subject" ToRole="Lesson" />
+    <NavigationProperty Name="Lessons1" Relationship="Self.FK__Lesson__SubjectI__70DDC3D8" FromRole="Subject" ToRole="Lesson" />
+    <NavigationProperty Name="Questions" Relationship="Self.FK__Question__Subjec__778AC167" FromRole="Subject" ToRole="Question" />
+    <NavigationProperty Name="Sections" Relationship="Self.FK__Section__Subject__7D439ABD" FromRole="Subject" ToRole="Section" />
+    <NavigationProperty Name="Topics" Relationship="Self.FK__Topic__SubjectID__00200768" FromRole="Subject" ToRole="Topic" />
+    <NavigationProperty Name="Topics1" Relationship="Self.FK__Topic__SubjectID__01142BA1" FromRole="Subject" ToRole="Topic" />
+  </EntityType>
+  <EntityType Name="tblLogin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoleId" Type="Int32" />
+    <NavigationProperty Name="tblRole" Relationship="Self.FK_tblLogin_tblRoles" FromRole="tblLogin" ToRole="tblRoles" />
+  </EntityType>
+  <EntityType Name="tblMainMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MainMenu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblSubMenus" Relationship="Self.FK_tblSubMenu_tblRoles" FromRole="tblMainMenu" ToRole="tblSubMenu" />
+  </EntityType>
+  <EntityType Name="tblRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Roles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblLogin" Relationship="Self.FK_tblLogin_tblRoles" FromRole="tblRoles" ToRole="tblLogin" />
+  </EntityType>
+  <EntityType Name="tblSubMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubMenu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Controller" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MainMenuId" Type="Int32" />
+    <Property Name="RoleId" Type="Int32" />
+    <NavigationProperty Name="tblMainMenu" Relationship="Self.FK_tblSubMenu_tblRoles" FromRole="tblSubMenu" ToRole="tblMainMenu" />
+  </EntityType>
+  <EntityType Name="Topic">
+    <Key>
+      <PropertyRef Name="TopicID" />
+    </Key>
+    <Property Name="TopicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubjectID" Type="Int32" />
+    <Property Name="TopicName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="LessonID" Type="Int32" />
+    <Property Name="SectionID" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Questions" Relationship="Self.FK__Question__TopicI__787EE5A0" FromRole="Topic" ToRole="Question" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Topic__SubjectID__00200768" FromRole="Topic" ToRole="Subject" />
+    <NavigationProperty Name="Subject1" Relationship="Self.FK__Topic__SubjectID__01142BA1" FromRole="Topic" ToRole="Subject" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="RoleID" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__UserRoles__RoleI__02084FDA" FromRole="UserRoles" ToRole="Role" />
+    <NavigationProperty Name="User" Relationship="Self.FK__UserRoles__UserI__02FC7413" FromRole="UserRoles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CandidateID" Type="Int32" />
+    <Property Name="Createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__UserI__02FC7413" FromRole="Users" ToRole="UserRoles" />
+  </EntityType>
+  <Association Name="FK__Answer__Question__619B8048">
+    <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
+    <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="QuestionID" />
+      </Principal>
+      <Dependent Role="Answer">
+        <PropertyRef Name="QuestionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CandExamR__Candi__628FA481">
+    <End Role="Candidate" Type="Self.Candidate" Multiplicity="1" />
+    <End Role="CandExamRegistration" Type="Self.CandExamRegistration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Candidate">
+        <PropertyRef Name="CandidateID" />
+      </Principal>
+      <Dependent Role="CandExamRegistration">
+        <PropertyRef Name="CandidateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CandExamR__ExamT__6383C8BA">
+    <End Role="ExamType" Type="Self.ExamType" Multiplicity="0..1" />
+    <End Role="CandExamRegistration" Type="Self.CandExamRegistration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamType">
+        <PropertyRef Name="ExamTypeID" />
+      </Principal>
+      <Dependent Role="CandExamRegistration">
+        <PropertyRef Name="ExamTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CandExamR__Insti__6477ECF3">
+    <End Role="Institute" Type="Self.Institute" Multiplicity="0..1" />
+    <End Role="CandExamRegistration" Type="Self.CandExamRegistration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Institute">
+        <PropertyRef Name="InstituteID" />
+      </Principal>
+      <Dependent Role="CandExamRegistration">
+        <PropertyRef Name="InstituteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Candidate__Candi__6754599E">
+    <End Role="Candidate" Type="Self.Candidate" Multiplicity="1" />
+    <End Role="CandidateExamType" Type="Self.CandidateExamType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Candidate">
+        <PropertyRef Name="CandidateID" />
+      </Principal>
+      <Dependent Role="CandidateExamType">
+        <PropertyRef Name="CandidateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Candidate__Insti__656C112C">
+    <End Role="Institute" Type="Self.Institute" Multiplicity="0..1" />
+    <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Institute">
+        <PropertyRef Name="InstituteID" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="InstituteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Candidate__State__66603565">
+    <End Role="State" Type="Self.State" Multiplicity="0..1" />
+    <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateID" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Candidate__ExamT__68487DD7">
+    <End Role="ExamType" Type="Self.ExamType" Multiplicity="1" />
+    <End Role="CandidateExamType" Type="Self.CandidateExamType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamType">
+        <PropertyRef Name="ExamTypeID" />
+      </Principal>
+      <Dependent Role="CandidateExamType">
+        <PropertyRef Name="ExamTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CandQuest__ExamT__693CA210">
+    <End Role="ExamType" Type="Self.ExamType" Multiplicity="0..1" />
+    <End Role="CandQuestionPaperCriteria" Type="Self.CandQuestionPaperCriteria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamType">
+        <PropertyRef Name="ExamTypeID" />
+      </Principal>
+      <Dependent Role="CandQuestionPaperCriteria">
+        <PropertyRef Name="ExamTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CandQuest__Insti__6A30C649">
+    <End Role="Institute" Type="Self.Institute" Multiplicity="0..1" />
+    <End Role="CandQuestionPaperCriteria" Type="Self.CandQuestionPaperCriteria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Institute">
+        <PropertyRef Name="InstituteID" />
+      </Principal>
+      <Dependent Role="CandQuestionPaperCriteria">
+        <PropertyRef Name="InstituteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ExamSubje__ExamT__6B24EA82">
+    <End Role="ExamType" Type="Self.ExamType" Multiplicity="1" />
+    <End Role="ExamSubjectMapping" Type="Self.ExamSubjectMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamType">
+        <PropertyRef Name="ExamTypeID" />
+      </Principal>
+      <Dependent Role="ExamSubjectMapping">
+        <PropertyRef Name="ExamTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ExamSubje__Subje__6C190EBB">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="ExamSubjectMapping" Type="Self.ExamSubjectMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="ExamSubjectMapping">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__QuestionE__ExamT__797309D9">
+    <End Role="ExamType" Type="Self.ExamType" Multiplicity="1" />
+    <End Role="QuestionExamMapping" Type="Self.QuestionExamMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamType">
+        <PropertyRef Name="ExamTypeID" />
+      </Principal>
+      <Dependent Role="QuestionExamMapping">
+        <PropertyRef Name="ExamTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Institute__State__6D0D32F4">
+    <End Role="State" Type="Self.State" Multiplicity="0..1" />
+    <End Role="Institute" Type="Self.Institute" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateID" />
+      </Principal>
+      <Dependent Role="Institute">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Lesson__SectionI__6E01572D">
+    <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+    <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="SectionID" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Lesson__SectionI__6EF57B66">
+    <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+    <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="SectionID" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Lesson__SubjectI__6FE99F9F">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Lesson__SubjectI__70DDC3D8">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Question__Lesson__72C60C4A">
+    <End Role="Lesson" Type="Self.Lesson" Multiplicity="0..1" />
+    <End Role="Question" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lesson">
+        <PropertyRef Name="LessonID" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="LessonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MenuList__RoleId__71D1E811">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="MenuList" Type="Self.MenuList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="MenuList">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RolePermi__Permi__7B5B524B">
+    <End Role="Permission" Type="Self.Permission" Multiplicity="0..1" />
+    <End Role="RolePermissions" Type="Self.RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permission">
+        <PropertyRef Name="PermissionID" />
+      </Principal>
+      <Dependent Role="RolePermissions">
+        <PropertyRef Name="PermissionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Question__QuesDi__73BA3083">
+    <End Role="QuestionDiffLevel" Type="Self.QuestionDiffLevel" Multiplicity="0..1" />
+    <End Role="Question" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionDiffLevel">
+        <PropertyRef Name="QuesDiffLevelID" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="QuesDiffLevelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Question__Questi__74AE54BC">
+    <End Role="QuestionSource" Type="Self.QuestionSource" Multiplicity="0..1" />
+    <End Role="Question" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionSource">
+        <PropertyRef Name="QuestionSourceID" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="QuestionSourceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Question__Questi__75A278F5">
+    <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="0..1" />
+    <End Role="Question" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionType">
+        <PropertyRef Name="QuestionTypeID" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="QuestionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Question__Sectio__76969D2E">
+    <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+    <End Role="Question" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="SectionID" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Question__Subjec__778AC167">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Question" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Question__TopicI__787EE5A0">
+    <End Role="Topic" Type="Self.Topic" Multiplicity="0..1" />
+    <End Role="Question" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Topic">
+        <PropertyRef Name="TopicID" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="TopicID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__QuestionE__Quest__7A672E12">
+    <End Role="Question" Type="Self.Question" Multiplicity="1" />
+    <End Role="QuestionExamMapping" Type="Self.QuestionExamMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="QuestionID" />
+      </Principal>
+      <Dependent Role="QuestionExamMapping">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RolePermi__RoleI__7C4F7684">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="RolePermissions" Type="Self.RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="RolePermissions">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRoles__RoleI__02084FDA">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Section__Subject__7D439ABD">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Section" Type="Self.Section" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Section">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Topic__SubjectID__00200768">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Topic">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Topic__SubjectID__01142BA1">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Topic">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLogin_tblRoles">
+    <End Role="tblRoles" Type="Self.tblRole" Multiplicity="1" />
+    <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblLogin">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubMenu_tblRoles">
+    <End Role="tblMainMenu" Type="Self.tblMainMenu" Multiplicity="0..1" />
+    <End Role="tblSubMenu" Type="Self.tblSubMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMainMenu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblSubMenu">
+        <PropertyRef Name="MainMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRoles__UserI__02FC7413">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_A46486_examEntities5" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Answers" EntityType="Self.Answer" />
+    <EntitySet Name="CandExamRegistrations" EntityType="Self.CandExamRegistration" />
+    <EntitySet Name="Candidates" EntityType="Self.Candidate" />
+    <EntitySet Name="CandidateExamTypes" EntityType="Self.CandidateExamType" />
+    <EntitySet Name="CandQuestionPaperCriterias" EntityType="Self.CandQuestionPaperCriteria" />
+    <EntitySet Name="Classes" EntityType="Self.Class" />
+    <EntitySet Name="ExamSchedules" EntityType="Self.ExamSchedule" />
+    <EntitySet Name="ExamSubjectMappings" EntityType="Self.ExamSubjectMapping" />
+    <EntitySet Name="ExamTypes" EntityType="Self.ExamType" />
+    <EntitySet Name="Institutes" EntityType="Self.Institute" />
+    <EntitySet Name="Lessons" EntityType="Self.Lesson" />
+    <EntitySet Name="MathsEquations" EntityType="Self.MathsEquation" />
+    <EntitySet Name="MenuLists" EntityType="Self.MenuList" />
+    <EntitySet Name="Permissions" EntityType="Self.Permission" />
+    <EntitySet Name="Questions" EntityType="Self.Question" />
+    <EntitySet Name="QuestionDiffLevels" EntityType="Self.QuestionDiffLevel" />
+    <EntitySet Name="QuestionExamMappings" EntityType="Self.QuestionExamMapping" />
+    <EntitySet Name="QuestionPaperTypes" EntityType="Self.QuestionPaperType" />
+    <EntitySet Name="QuestionSources" EntityType="Self.QuestionSource" />
+    <EntitySet Name="QuestionTypes" EntityType="Self.QuestionType" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="RolePermissions" EntityType="Self.RolePermission" />
+    <EntitySet Name="Sections" EntityType="Self.Section" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="Subjects" EntityType="Self.Subject" />
+    <EntitySet Name="tblLogins" EntityType="Self.tblLogin" />
+    <EntitySet Name="tblMainMenus" EntityType="Self.tblMainMenu" />
+    <EntitySet Name="tblRoles" EntityType="Self.tblRole" />
+    <EntitySet Name="tblSubMenus" EntityType="Self.tblSubMenu" />
+    <EntitySet Name="Topics" EntityType="Self.Topic" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__Answer__Question__619B8048" Association="Self.FK__Answer__Question__619B8048">
+      <End Role="Question" EntitySet="Questions" />
+      <End Role="Answer" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CandExamR__Candi__628FA481" Association="Self.FK__CandExamR__Candi__628FA481">
+      <End Role="Candidate" EntitySet="Candidates" />
+      <End Role="CandExamRegistration" EntitySet="CandExamRegistrations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CandExamR__ExamT__6383C8BA" Association="Self.FK__CandExamR__ExamT__6383C8BA">
+      <End Role="ExamType" EntitySet="ExamTypes" />
+      <End Role="CandExamRegistration" EntitySet="CandExamRegistrations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CandExamR__Insti__6477ECF3" Association="Self.FK__CandExamR__Insti__6477ECF3">
+      <End Role="Institute" EntitySet="Institutes" />
+      <End Role="CandExamRegistration" EntitySet="CandExamRegistrations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Candidate__Candi__6754599E" Association="Self.FK__Candidate__Candi__6754599E">
+      <End Role="Candidate" EntitySet="Candidates" />
+      <End Role="CandidateExamType" EntitySet="CandidateExamTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Candidate__Insti__656C112C" Association="Self.FK__Candidate__Insti__656C112C">
+      <End Role="Institute" EntitySet="Institutes" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Candidate__State__66603565" Association="Self.FK__Candidate__State__66603565">
+      <End Role="State" EntitySet="States" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Candidate__ExamT__68487DD7" Association="Self.FK__Candidate__ExamT__68487DD7">
+      <End Role="ExamType" EntitySet="ExamTypes" />
+      <End Role="CandidateExamType" EntitySet="CandidateExamTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CandQuest__ExamT__693CA210" Association="Self.FK__CandQuest__ExamT__693CA210">
+      <End Role="ExamType" EntitySet="ExamTypes" />
+      <End Role="CandQuestionPaperCriteria" EntitySet="CandQuestionPaperCriterias" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CandQuest__Insti__6A30C649" Association="Self.FK__CandQuest__Insti__6A30C649">
+      <End Role="Institute" EntitySet="Institutes" />
+      <End Role="CandQuestionPaperCriteria" EntitySet="CandQuestionPaperCriterias" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ExamSubje__ExamT__6B24EA82" Association="Self.FK__ExamSubje__ExamT__6B24EA82">
+      <End Role="ExamType" EntitySet="ExamTypes" />
+      <End Role="ExamSubjectMapping" EntitySet="ExamSubjectMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ExamSubje__Subje__6C190EBB" Association="Self.FK__ExamSubje__Subje__6C190EBB">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="ExamSubjectMapping" EntitySet="ExamSubjectMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__QuestionE__ExamT__797309D9" Association="Self.FK__QuestionE__ExamT__797309D9">
+      <End Role="ExamType" EntitySet="ExamTypes" />
+      <End Role="QuestionExamMapping" EntitySet="QuestionExamMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Institute__State__6D0D32F4" Association="Self.FK__Institute__State__6D0D32F4">
+      <End Role="State" EntitySet="States" />
+      <End Role="Institute" EntitySet="Institutes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Lesson__SectionI__6E01572D" Association="Self.FK__Lesson__SectionI__6E01572D">
+      <End Role="Section" EntitySet="Sections" />
+      <End Role="Lesson" EntitySet="Lessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Lesson__SectionI__6EF57B66" Association="Self.FK__Lesson__SectionI__6EF57B66">
+      <End Role="Section" EntitySet="Sections" />
+      <End Role="Lesson" EntitySet="Lessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Lesson__SubjectI__6FE99F9F" Association="Self.FK__Lesson__SubjectI__6FE99F9F">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="Lesson" EntitySet="Lessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Lesson__SubjectI__70DDC3D8" Association="Self.FK__Lesson__SubjectI__70DDC3D8">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="Lesson" EntitySet="Lessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Question__Lesson__72C60C4A" Association="Self.FK__Question__Lesson__72C60C4A">
+      <End Role="Lesson" EntitySet="Lessons" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MenuList__RoleId__71D1E811" Association="Self.FK__MenuList__RoleId__71D1E811">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="MenuList" EntitySet="MenuLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RolePermi__Permi__7B5B524B" Association="Self.FK__RolePermi__Permi__7B5B524B">
+      <End Role="Permission" EntitySet="Permissions" />
+      <End Role="RolePermissions" EntitySet="RolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Question__QuesDi__73BA3083" Association="Self.FK__Question__QuesDi__73BA3083">
+      <End Role="QuestionDiffLevel" EntitySet="QuestionDiffLevels" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Question__Questi__74AE54BC" Association="Self.FK__Question__Questi__74AE54BC">
+      <End Role="QuestionSource" EntitySet="QuestionSources" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Question__Questi__75A278F5" Association="Self.FK__Question__Questi__75A278F5">
+      <End Role="QuestionType" EntitySet="QuestionTypes" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Question__Sectio__76969D2E" Association="Self.FK__Question__Sectio__76969D2E">
+      <End Role="Section" EntitySet="Sections" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Question__Subjec__778AC167" Association="Self.FK__Question__Subjec__778AC167">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Question__TopicI__787EE5A0" Association="Self.FK__Question__TopicI__787EE5A0">
+      <End Role="Topic" EntitySet="Topics" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__QuestionE__Quest__7A672E12" Association="Self.FK__QuestionE__Quest__7A672E12">
+      <End Role="Question" EntitySet="Questions" />
+      <End Role="QuestionExamMapping" EntitySet="QuestionExamMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RolePermi__RoleI__7C4F7684" Association="Self.FK__RolePermi__RoleI__7C4F7684">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="RolePermissions" EntitySet="RolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRoles__RoleI__02084FDA" Association="Self.FK__UserRoles__RoleI__02084FDA">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Section__Subject__7D439ABD" Association="Self.FK__Section__Subject__7D439ABD">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="Section" EntitySet="Sections" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Topic__SubjectID__00200768" Association="Self.FK__Topic__SubjectID__00200768">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="Topic" EntitySet="Topics" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Topic__SubjectID__01142BA1" Association="Self.FK__Topic__SubjectID__01142BA1">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="Topic" EntitySet="Topics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLogin_tblRoles" Association="Self.FK_tblLogin_tblRoles">
+      <End Role="tblRoles" EntitySet="tblRoles" />
+      <End Role="tblLogin" EntitySet="tblLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubMenu_tblRoles" Association="Self.FK_tblSubMenu_tblRoles">
+      <End Role="tblMainMenu" EntitySet="tblMainMenus" />
+      <End Role="tblSubMenu" EntitySet="tblSubMenus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRoles__UserI__02FC7413" Association="Self.FK__UserRoles__UserI__02FC7413">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <FunctionImport Name="DeleteCandidate" ReturnType="Collection(Int32)">
+      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteQuestion" ReturnType="Collection(Int32)">
+      <Parameter Name="QuestionId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllCandidates" ReturnType="Collection(DB_A46486_examModel.GetAllCandidates_Result)" />
+    <FunctionImport Name="GetAllExamTypes" ReturnType="Collection(DB_A46486_examModel.GetAllExamTypes_Result)" />
+    <FunctionImport Name="GetAllInstitutes" ReturnType="Collection(DB_A46486_examModel.GetAllInstitutes_Result)" />
+    <FunctionImport Name="GetAllStates" ReturnType="Collection(DB_A46486_examModel.GetAllStates_Result)" />
+    <FunctionImport Name="GetCandidate" ReturnType="Collection(DB_A46486_examModel.GetCandidate_Result)">
+      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetInstitute" ReturnType="Collection(DB_A46486_examModel.GetInstitute_Result)">
+      <Parameter Name="InstituteID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetLesson" ReturnType="Collection(DB_A46486_examModel.GetLesson_Result)">
+      <Parameter Name="LessonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetMenuList" ReturnType="Collection(DB_A46486_examModel.GetMenuList_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetQuestion" ReturnType="Collection(DB_A46486_examModel.GetQuestion_Result)">
+      <Parameter Name="QuestionId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetQuestionPaperCriteria" ReturnType="Collection(DB_A46486_examModel.GetQuestionPaperCriteria_Result)">
+      <Parameter Name="ExamTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="CriteriaType" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetSection" ReturnType="Collection(DB_A46486_examModel.GetSection_Result)">
+      <Parameter Name="SectionID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetTopic" ReturnType="Collection(DB_A46486_examModel.GetTopic_Result)">
+      <Parameter Name="TopicID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCandidate">
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="MName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="StateId" Mode="In" Type="Int32" />
+      <Parameter Name="AdharCardNo" Mode="In" Type="String" />
+      <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="Gender" Mode="In" Type="String" />
+      <Parameter Name="Photo" Mode="In" Type="String" />
+      <Parameter Name="EmailId" Mode="In" Type="String" />
+      <Parameter Name="CollegeName" Mode="In" Type="String" />
+      <Parameter Name="InstituteId" Mode="In" Type="Int32" />
+      <Parameter Name="Class" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertQuestion">
+      <Parameter Name="SubjectID" Mode="In" Type="Int32" />
+      <Parameter Name="SectionID" Mode="In" Type="Int32" />
+      <Parameter Name="LessonID" Mode="In" Type="Int32" />
+      <Parameter Name="TopicID" Mode="In" Type="Int32" />
+      <Parameter Name="QuestionTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="QuesDiffLevelID" Mode="In" Type="Int32" />
+      <Parameter Name="QuestionText" Mode="In" Type="String" />
+      <Parameter Name="QuestionImage" Mode="In" Type="String" />
+      <Parameter Name="MarksForQuestion" Mode="In" Type="Int32" />
+      <Parameter Name="IsMultiSelect" Mode="In" Type="Boolean" />
+      <Parameter Name="QuestionSourceID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateCandidate">
+      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="MName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="StateId" Mode="In" Type="Int32" />
+      <Parameter Name="AdharCardNo" Mode="In" Type="String" />
+      <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="Gender" Mode="In" Type="String" />
+      <Parameter Name="Photo" Mode="In" Type="String" />
+      <Parameter Name="EmailId" Mode="In" Type="String" />
+      <Parameter Name="CollegeName" Mode="In" Type="String" />
+      <Parameter Name="InstituteId" Mode="In" Type="Int32" />
+      <Parameter Name="Class" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateQuestion">
+      <Parameter Name="QuestionId" Mode="In" Type="Int32" />
+      <Parameter Name="SubjectID" Mode="In" Type="Int32" />
+      <Parameter Name="SectionID" Mode="In" Type="Int32" />
+      <Parameter Name="LessonID" Mode="In" Type="Int32" />
+      <Parameter Name="TopicID" Mode="In" Type="Int32" />
+      <Parameter Name="QuestionTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="QuesDiffLevelID" Mode="In" Type="Int32" />
+      <Parameter Name="QuestionText" Mode="In" Type="String" />
+      <Parameter Name="QuestionImage" Mode="In" Type="String" />
+      <Parameter Name="MarksForQuestion" Mode="In" Type="Int32" />
+      <Parameter Name="QuestionSourceID" Mode="In" Type="Int32" />
+      <Parameter Name="IsMultiSelect" Mode="In" Type="Boolean" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetAllCandidates_Result">
+    <Property Type="Int32" Name="CandidateID" Nullable="false" />
+    <Property Type="String" Name="FName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AdharCardNo" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+    <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="Photo" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="EmailID" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CollegeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Class" Nullable="true" />
+    <Property Type="Int32" Name="StateId" Nullable="true" />
+    <Property Type="Int32" Name="InstituteId" Nullable="true" />
+    <Property Type="Boolean" Name="Active" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetAllExamTypes_Result">
+    <Property Type="Int32" Name="ExamTypeID" Nullable="false" />
+    <Property Type="String" Name="ExamName" Nullable="true" MaxLength="256" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="16" />
+    <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="16" />
+    <Property Type="Int32" Name="TotalNoOfQuestions" Nullable="true" />
+    <Property Type="Boolean" Name="Active" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetAllInstitutes_Result">
+    <Property Type="Int32" Name="InstituteID" Nullable="false" />
+    <Property Type="String" Name="InstituteName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="InstituteDescription" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="StateId" Nullable="true" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="EmailID" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Active" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetAllStates_Result">
+    <Property Type="Int32" Name="StateID" Nullable="false" />
+    <Property Type="String" Name="StateDescription" Nullable="true" MaxLength="256" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="16" />
+    <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="16" />
+    <Property Type="Boolean" Name="Active" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetCandidate_Result">
+    <Property Type="Int32" Name="CandidateID" Nullable="true" />
+    <Property Type="String" Name="FName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CandidateName" Nullable="true" MaxLength="152" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AdharCardNo" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+    <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="Photo" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="EmailID" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CollegeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Class" Nullable="true" />
+    <Property Type="Boolean" Name="Active" Nullable="true" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="InstituteName" Nullable="true" MaxLength="256" />
+  </ComplexType>
+  <ComplexType Name="GetInstitute_Result">
+    <Property Type="Int32" Name="InstituteID" Nullable="false" />
+    <Property Type="String" Name="InstituteName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="InstituteDescription" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="StateId" Nullable="true" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="EmailID" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Active" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetLesson_Result">
+    <Property Type="Int32" Name="LessonID" Nullable="false" />
+    <Property Type="String" Name="lessonName" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="SectionID" Nullable="true" />
+    <Property Type="String" Name="SectionName" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="SubjectID" Nullable="true" />
+    <Property Type="String" Name="SubjectName" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetMenuList_Result">
+    <Property Type="Int32" Name="MenuID" Nullable="false" />
+    <Property Type="Int32" Name="MenuParentID" Nullable="true" />
+    <Property Type="String" Name="MenuName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ControllerName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ActionName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetQuestion_Result">
+    <Property Type="Int32" Name="QuestionID" Nullable="true" />
+    <Property Type="Int32" Name="SubjectID" Nullable="true" />
+    <Property Type="String" Name="SubjectName" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="SectionID" Nullable="true" />
+    <Property Type="String" Name="SectionName" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="LessonID" Nullable="true" />
+    <Property Type="String" Name="LessonName" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="TopicID" Nullable="true" />
+    <Property Type="String" Name="TopicName" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="QuestionTypeID" Nullable="true" />
+    <Property Type="Int32" Name="QuesDiffLevelID" Nullable="true" />
+    <Property Type="String" Name="QuestionDiffLevel" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="QuestionText" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="QuestionImage" Nullable="true" MaxLength="256" />
+    <Property Type="Int32" Name="MarksForQuestion" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetQuestionPaperCriteria_Result">
+    <Property Type="Int32" Name="Subjectid" Nullable="false" />
+    <Property Type="String" Name="SubjectName" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="NoOfQuestions" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetSection_Result">
+    <Property Type="Int32" Name="SectionID" Nullable="false" />
+    <Property Type="String" Name="SectionName" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="SubjectID" Nullable="true" />
+    <Property Type="String" Name="SubjectName" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetTopic_Result">
+    <Property Type="Int32" Name="TopicID" Nullable="false" />
+    <Property Type="String" Name="TopicName" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="LessonID" Nullable="false" />
+    <Property Type="String" Name="LessonName" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="SectionID" Nullable="true" />
+    <Property Type="String" Name="SectionName" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="SubjectID" Nullable="true" />
+    <Property Type="String" Name="SubjectName" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

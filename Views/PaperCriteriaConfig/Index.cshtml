@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Demo.Models.PaperCriteriaConfigViewModel>
+
+<p>
+    @Html.ActionLink("Add New Paper Criteria", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExamTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstituteID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DefaultCriteria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubjectID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SectionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LessonID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TopicID)
+        </th>
+        <th></th>
+    </tr>
+
+    @*@foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExamTypeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InstituteID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefaultCriteria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SectionID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LessonID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TopicID)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }*@
+
+</table>

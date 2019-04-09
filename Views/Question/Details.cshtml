@@ -1,0 +1,113 @@
+﻿@model Demo.Models.QuestionViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script defer src="~/Scripts/Math/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<h2>Details</h2>
+
+<div>
+    <h4>Question</h4>
+	<hr />
+    <table class="table-bordered" width="500">
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.QuestionID)</b></td>
+            <td>@Html.DisplayFor(model => model.QuestionID)</td>
+        </tr>
+
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.subjectName)</b></td>
+            <td>@Html.DisplayFor(model => model.subjectName)</td>
+        </tr>
+
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.section)</b></td>
+            <td>@Html.DisplayFor(model => model.section)</td>
+        </tr>
+
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.lesson)</b></td>
+            <td>@Html.DisplayFor(model => model.lesson)</td>
+        </tr>
+
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.topic)</b></td>
+            <td>@Html.DisplayFor(model => model.topic)</td>
+        </tr>
+
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.QuestionTypeName)</b></td>
+            <td>@Html.DisplayFor(model => model.QuestionTypeName)</td>
+        </tr>
+
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.questiondifflevel)</b></td>
+            <td>@Html.DisplayFor(model => model.questiondifflevel)</td>
+        </tr>
+
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.QuestionSourceName)</b></td>
+            <td>@Html.DisplayFor(model => model.QuestionSourceName)</td>
+        </tr>
+
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.QuestionText)</b></td>
+            <td>@Html.DisplayFor(model => model.QuestionText)</td>
+        </tr>
+
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.QuestionImage)</b></td>
+            <td>@Html.DisplayFor(model => model.QuestionImage)</td>
+        </tr>
+
+        <tr>
+            <td><b>@Html.DisplayNameFor(model => model.MarksForQuestion)</b></td>
+            <td>@Html.DisplayFor(model => model.MarksForQuestion)</td>
+        </tr>
+    </table>
+    <table class="table-bordered" width="500">
+        <tr><td colspan="4"><b>Answer</b></td></tr>
+        <tr>
+            <td></td>
+            <td>Answer</td>
+            <td>Answer Image</td>
+            <td>Correct Answer</td>
+        </tr>
+        <tr>
+            <td><b>@Html.LabelFor(model => model.Answer1.AnswerText, "Answer A:")</b></td>
+            <td>@Html.DisplayFor(model => model.Answer1.AnswerText)</td>
+            <td>@Html.DisplayFor(model => model.Answer1.AnswerImage)</td>
+            <td>@Html.DisplayFor(model => model.Answer1.CorrectAnswer)</td>
+        </tr>
+
+        <tr>
+            <td><b>@Html.LabelFor(model => model.Answer2.AnswerText, "Answer B:")</b></td>
+            <td>@Html.DisplayFor(model => model.Answer2.AnswerText)</td>
+            <td>@Html.DisplayFor(model => model.Answer2.AnswerImage)</td>
+            <td>@Html.DisplayFor(model => model.Answer2.CorrectAnswer)</td>
+        </tr>
+        <tr>
+            <td><b>@Html.LabelFor(model => model.Answer3.AnswerText, "Answer C:")</b></td>
+            <td>@Html.DisplayFor(model => model.Answer3.AnswerText)</td>
+            <td>@Html.DisplayFor(model => model.Answer3.AnswerImage)</td>
+            <td>@Html.DisplayFor(model => model.Answer3.CorrectAnswer)</td>
+        </tr>
+        <tr>
+            <td><b>@Html.LabelFor(model => model.Answer4.AnswerText, "Answer D:")</b></td>
+            <td>@Html.DisplayFor(model => model.Answer4.AnswerText)</td>
+            <td>@Html.DisplayFor(model => model.Answer4.AnswerImage)</td>
+            <td>@Html.DisplayFor(model => model.Answer4.CorrectAnswer)</td>
+        </tr>
+
+    </table>
+              
+  
+
+</div>
+<hr />
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionID })  |
+    @Html.ActionLink("Back to List", "Index")
+</p>

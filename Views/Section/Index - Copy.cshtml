@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Demo.Models.SectionViewModel>
+
+@{
+    ViewBag.Title = "Section";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-secondary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SubjectID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SectionName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => ((List<SelectListItem>)ViewData["Subjects"]).Single(sli => Convert.ToInt32(sli.Value) == item.SubjectID).Text)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.SectionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.SectionID }, new { @class = "btn btn-secondary" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.SectionID }, new { @class = "btn btn-secondary" })
+        </td>
+    </tr>
+}
+
+</table>

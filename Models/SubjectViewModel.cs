@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Demo.Models
+{
+    public class SubjectViewModel
+    {
+        [Key]
+        public int SubjectID { get; set; }
+
+        [Display(Name = "Subject")]
+        [Required(ErrorMessage = "This field is required !")]
+        public string SubjectName { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+
+        [Display(Name = "Description")]
+        [Required(ErrorMessage = "This field is required !")]
+        public string Description { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+
+        [Display(Name = "Class")]
+        [Required(ErrorMessage = "This field is required !")]
+        public int ClassID { get;set; }
+
+        public string ClassDetails { get; set; }
+
+        public List<SelectListItem> Class { get; set; }
+
+        public List<SubjectViewModel> ShowallSubjects { get; set; }
+        public Nullable<bool> Active { get; set; }
+    }
+}

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Demo.Models.QuestionViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<p>
+    @Html.ActionLink("Add New Question", "Create", null, new { @class = "btn btn-primary"})
+</p>
+
+<script>
+    $(function () {
+        $("#myTable").dataTable();
+        paging: false
+        searching: true
+    });
+</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script defer src="/Scripts/Math/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script defer src="~/Scripts/Math/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div style="width:100%; margin:0 auto;">
+    <table id="mytable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Question</th>
+                <th>Subject</th>
+                <th>Lesson</th>
+                @*<th>Marks</th>*@
+                <th>Difficuty Level</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+</style>
+
+@* Load datatable css *@
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+@* Load datatable js *@
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var math = document.getElementById("#mytable");
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            $('#mytable').DataTable({
+            "ajax": {
+            "url": "/Question/loaddata",
+            "type": "GET",
+            "datatype": "json"
+            },
+            "columns": [
+            { "data": "QuestionID", "autoWidth": true },
+            { "data": "QuestionText", "autoWidth": true },
+            { "data": "subjectName", "autoWidth": true },
+            { "data": "lesson", "autoWidth": true },
+            //{ "data": "MarksForQuestion", "autoWidth": true },
+            { "data": "questiondifflevel", "autoWidth": true },
+            { "data": "QuestionID", "render": function(data){
+                return "<a class='btn btn-sm' style = 'cursor:pointer' onclick='onclickEdit(" + data + ")'><i class='fa fa-pencil'></i> Edit</a> <a class='btn btn-sm' style = 'cursor:pointer' onclick='onclickDelete(" + data + ")'><i class='fa fa-trash'></i> Delete</a><a class='btn btn-sm' style = 'cursor:pointer' onclick='onclickDetails(" + data + ")'><i class='fa fa-info'></i> Details</a>";
+            } ,
+            "orderable":false,
+            }
+
+            ],
+            "language": {
+                "emptyTable":"No Data Found, Please click on <b>Create New</b> button"
+            }
+
+        });
+        });
+
+        function onclickEdit(id) {
+
+            var id = id;
+            var url;
+            url = '@Url.Action("Edit","Question")' + '/' + id;
+            document.location = url;
+
+        }
+
+        function onclickDelete(id) {
+
+            var id = id;
+            var url;
+            url = '@Url.Action("Delete", "Question")' + '/' + id;
+
+            document.location = url;
+        }
+
+        function onclickDetails(id) {
+
+            //alert(id);
+
+            var id=id;
+            var url;
+            url='@Url.Action("Details", "Question")'+'/'+ id;
+
+            //alert(url);
+
+            document.location = url;
+
+        }
+    </script>
+    }

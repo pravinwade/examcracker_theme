@@ -1,0 +1,159 @@
+﻿@model Demo.Models.InstituteViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .mycombo {
+        width: 100%;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Institute - Edit</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.InstituteID)
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.InstituteName)
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.InstituteName, new { @class = "au-input au-input--full" })
+                    @Html.ValidationMessageFor(model => model.InstituteName)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.InstituteDescription)
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.InstituteDescription, new { @class = "au-input au-input--full" })
+                    @Html.ValidationMessageFor(model => model.InstituteDescription)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.Address)
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Address, new { @class = "au-input au-input--full" })
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.City)
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.City, new { @class = "au-input au-input--full" })
+                    @Html.ValidationMessageFor(model => model.City)
+                </div>
+            </div>
+        </div>
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.StateId, "State")
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.StateId, Model.States, "--Select State--", new { @class = "au-input au-input--full" })
+                    @Html.ValidationMessageFor(model => model.StateId)
+                </div>
+            </div>
+         </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.Phone)
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Phone, new { @class = "au-input au-input--full" })
+                        @Html.ValidationMessageFor(model => model.Phone)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.Mobile)
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Mobile, new { @class = "au-input au-input--full" })
+                        @Html.ValidationMessageFor(model => model.Mobile)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.EmailID)
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EmailID, new { @class = "au-input au-input--full" })
+                        @Html.ValidationMessageFor(model => model.EmailID)
+                    </div>
+                </div>
+            </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.ExamTypes)
+                </div>
+                <div class="col-md-10">
+                    <table>
+
+                        @for (int i = 0; i < Model.ExamTypes.Count(); i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.CheckBoxFor(m => m.ExamTypes[i].Selected)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => m.ExamTypes[i].Text)
+                                    @Html.HiddenFor(m => m.ExamTypes[i].Value)
+                                    @Html.HiddenFor(m => m.ExamTypes[i].Text)
+
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

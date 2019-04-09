@@ -1,0 +1,69 @@
+﻿@model Demo.Models.SectionViewModel
+
+@{
+    ViewBag.Title = "Edit Section";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Section - Edit</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.SectionID)
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.SubjectID) 
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.SubjectID, Model.Subjects,"--Select Section--", new { @class = "au-input au-input--full" }))
+                    @Html.ValidationMessageFor(model => model.SubjectID)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.SectionName) 
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SectionName, new { @class = "au-input au-input--full" }))
+                    @Html.ValidationMessageFor(model => model.SectionName)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.Description) 
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { @class = "au-input au-input--full" }))
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+        </div>
+      }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

@@ -1,0 +1,118 @@
+﻿@model IEnumerable<Demo.Models.CandiateViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Add New Candidate", "Create", null,new { @class = "btn btn-primary"})
+</p>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/../Content/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/../Content/css/font-awesome.min.css" rel="stylesheet">
+
+<script>
+    $(function () {
+        $("#myTable").dataTable();
+        paging: false
+        searching: true
+    });
+</script>
+
+
+<div style="width:100%; margin:0 auto;">
+    <table id="myTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Institute</th>
+                <th>Adhar Card</th>
+                <th>Mobile</th>
+                <th>Email ID</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+</style>
+
+@* Load datatable css *@
+<link href="//cdn.datatables.net/1.10.9/../Content/css/jquery.dataTables.min.css" rel="stylesheet" />
+@* Load datatable js *@
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "ajax": {
+                    "url": "/Candidate/loaddata",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                { "data": "CandidateID", "autoWidth": true },
+                { "data": "FName", "autoWidth": true },
+                { "data": "LName", "autoWidth": true },
+                { "data": "Institute", "autoWidth": true },
+                { "data": "AdharCardNo", "autoWidth": true },
+                { "data": "Mobile", "autoWidth": true },
+                { "data": "EmailID", "autoWidth": true },
+                { "data": "CandidateID", "render": function(data){
+                    return "<a class='btn btn-sm' style = 'cursor:pointer' onclick='onclickEdit(" + data + ")'><i class='fa fa-pencil'></i> Edit</a> <a class='btn btn-sm' style = 'cursor:pointer' onclick='onclickDelete(" + data + ")'><i class='fa fa-trash'></i> Delete</a>";
+                } ,
+                "orderable":false,
+                }
+
+                ],
+                "language": {
+                    "emptyTable":"No Data Found, Please click on <b>Create New</b> button"
+                }
+            });
+        });
+
+        function onclickEdit(id) {
+
+            //alert(id);
+
+            var id=id;
+            var url;
+            url='@Url.Action("Edit","Candidate")'+'/'+ id;
+
+            //alert(url);
+
+            document.location = url;
+
+        }
+
+        function onclickDelete(id) {
+
+            //alert(id);
+
+            var id=id;
+            var url;
+            url='@Url.Action("Delete","Candidate")'+'/'+ id;
+
+            //alert(url);
+
+            document.location = url;
+
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

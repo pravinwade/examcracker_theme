@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Demo.Models.LessonViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Add New Lesson", "Create", null,new { @class = "btn btn-primary"})
+</p>
+
+<script>
+    $(function () {
+        $("#myTable").dataTable();
+        paging: false
+        searching: true
+    });
+</script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/../Content/css/font-awesome.min.css" rel="stylesheet">
+<div style="width:100%; margin:0 auto;">
+    <table id="myTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Section</th>
+                <th>Lesson</th>
+                @*<th>Description</th>*@
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+</style>
+
+@* Load datatable css *@
+<link href="//cdn.datatables.net/1.10.9/../Content/css/jquery.dataTables.min.css" rel="stylesheet" />
+@* Load datatable js *@
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "ajax": {
+                    "url": "/Lesson/loaddata",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                { "data": "SubjectName", "autoWidth": true },
+                 { "data": "SectionName", "autoWidth": true },
+                  { "data": "LessonName", "autoWidth": true },
+                //{ "data": "Description", "autoWidth": true },
+                { "data": "LessonID", "render": function(data){
+
+                    return "<a class='btn btn-sm' style = 'cursor:pointer' onclick='onclickEdit(" + data + ")'><i class='fa fa-pencil'></i> Edit</a> <a class='btn btn-sm' style = 'cursor:pointer' onclick='onclickDelete(" + data + ")'><i class='fa fa-trash'></i> Delete</a> <a class='btn btn-sm' style = 'cursor:pointer' onclick='onclickDetails(" + data + ")'><i class='fa fa-info'></i> Details</a>";
+                } ,
+                    "orderable":false,
+                }
+                ],
+                "language": {
+                    "emptyTable":"No Data Found, Please click on <b>Create New</b> button"
+                }
+            });
+        });
+
+        function onclickEdit(id) {
+
+            //alert(id);
+
+            var id=id;
+            var url;
+            url='@Url.Action("Edit","Lesson")'+'/'+ id;
+
+            //alert(url);
+
+            document.location = url;
+
+        }
+
+        function onclickDelete(id) {
+
+            //alert(id);
+
+            var id=id;
+            var url;
+            url='@Url.Action("Delete", "Lesson")'+'/'+ id;
+
+            //alert(url);
+
+            document.location = url;
+
+        }
+
+        function onclickDetails(id) {
+
+            //alert(id);
+
+            var id=id;
+            var url;
+            url='@Url.Action("Details", "Lesson")'+'/'+ id;
+
+            //alert(url);
+
+            document.location = url;
+
+        }
+
+    </script>
+}
+
+

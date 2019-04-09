@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Demo.Models.CandiateViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-secondary" })
+</p>
+<table class="table">
+    <tr><th>Candidate List</th></tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailID)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.LName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailID)
+            </td>
+           
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CandidateID }, new { @class = "btn btn-secondary" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CandidateID }, new { @class = "btn btn-secondary" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@*<script>
+        $(document).ready(function () {
+            $('#mytable').DataTable();
+        });
+    </script>
+
+    <link rel="stylesheet” type=”text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    <div style="width:100%; margin:0 auto;">
+        <table id="mytable">
+            <thead>
+                <tr>
+                    @*<th>CandidateID</th>
+                    <th>CandidateName</th>
+                    <th>Address</th>
+                    <th>AdharCardNo</th>
+                    <th>dateofbirth</th>
+                    <th>InstituteName</th>
+    </tr>
+            </thead>
+        </table>
+    </div>
+    <style>
+        tr.even {
+            background-color: #F5F5F5 !important;
+        }
+    </style>*@
+
+
+@* Load datatable css *@
+@*<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+@* Load datatable js *@
+@*@section Scripts{
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#mytable').DataTable({
+                "ajax": {
+                    "url": "/Candidate/loaddata",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                //{ "data": "CandidateID", "autoWidth": true },
+                { "data": "CandidateName", "autoWidth": true },
+                { "data": "Address", "autoWidth": true },
+                { "data": "AdharCardNo", "autoWidth": true },
+                { "data": "DateOfBirth", "autoWidth": true },
+                { "data": "InstituteName", "autoWidth": true }
+                ]
+            });
+        });
+    </script>
+}*@
+

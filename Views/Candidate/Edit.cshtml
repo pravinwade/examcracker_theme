@@ -1,0 +1,235 @@
+﻿@model Demo.Models.CandiateViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .mycombo {
+        width: 100%;
+    }
+</style>
+
+
+@using (Html.BeginForm("Edit", "Candidate", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Candidate - Edit</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.CandidateID)
+       
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.InstituteID)       
+                </div>
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.InstituteID)*@
+                    @Html.DropDownListFor(model => model.InstituteID, Model.Institutes, "--Select Institute--", new { @class = "au-input au-input--full" })
+                    @Html.ValidationMessageFor(model => model.InstituteID)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.FName)       
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FName, new { @class = "au-input au-input--full" })
+                    @Html.ValidationMessageFor(model => model.FName)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.MName)       
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MName, new { @class = "au-input au-input--full" })
+                    @Html.ValidationMessageFor(model => model.MName)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.LName)       
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LName, new { @class = "au-input au-input--full" })
+                    @Html.ValidationMessageFor(model => model.LName)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.Address)       
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Address, new { @class = "au-input au-input--full" })
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.StateID, "State")       
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.StateID, Model.States, "--Select State--", new { @class = "au-input au-input--full" })
+                    @Html.ValidationMessageFor(model => model.StateID)
+                </div>
+            </div>
+        </div>
+             <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.City)       
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.City, new { @class = "au-input au-input--full" })
+                        @Html.ValidationMessageFor(model => model.City)
+                    </div>
+                </div>
+            </div>
+
+                    <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.AdharCardNo)       
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.AdharCardNo, new { @class = "au-input au-input--full" })
+                            @Html.ValidationMessageFor(model => model.AdharCardNo)
+                        </div>
+                    </div>
+                </div>
+       
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.Mobile)       
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Mobile, new { @class = "au-input au-input--full" })
+                            @Html.ValidationMessageFor(model => model.Mobile)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.Gender)       
+                        </div>
+                        <div class="col-md-10">
+                            Male
+                            @Html.RadioButtonFor(model => model.Gender, "M", new { @class = "au-input au-input--full" })
+                            Female
+                            @Html.RadioButtonFor(model => model.Gender, "F", new { @class = "au-input au-input--full" })
+                        </div>
+                    </div>
+                </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Photo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img src="@Url.Content(@Model.Photo)" alt="" onerror="this.onerror = null; this.src = '~/Image/no_image.jpg';" width="150" height="150" />
+                @*@Html.EditorFor(model => model.Photo)*@
+
+            </div>
+            <div class="col-md-10">
+                <input type="file" name="CandImage" value="@Model.Photo">
+                @Html.ValidationMessageFor(model => model.Photo)
+            </div>
+        </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.EmailID)       
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.EmailID, new { @class = "au-input au-input--full" })
+                            @Html.ValidationMessageFor(model => model.EmailID)
+                        </div>
+                    </div>
+                </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.CollegeName)       
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CollegeName, new { @class = "au-input au-input--full"})
+                            @Html.ValidationMessageFor(model => model.CollegeName)
+                        </div>
+                    </div>
+                </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.ClassID)       
+                    </div>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.ClassID, Model.Class, "--Select Class--", new { @class = "au-input au-input--full"})     
+                        @Html.ValidationMessageFor(model => model.ClassID)
+                    </div>
+                </div>
+            </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.ExamTypes)       
+                    </div>
+                    <div class="col-md-10">
+                        <table>
+
+                            @for (int i = 0; i < Model.ExamTypes.Count(); i++)
+                    {
+                                <tr>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m.ExamTypes[i].Selected)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => m.ExamTypes[i].Text)
+                                        @Html.HiddenFor(m => m.ExamTypes[i].Value)
+                                        @Html.HiddenFor(m => m.ExamTypes[i].Text)
+
+                                    </td>
+                                </tr>
+                    }
+                        </table>
+                    </div>
+                </div>
+            </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }

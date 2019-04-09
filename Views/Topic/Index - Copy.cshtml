@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Demo.Models.TopicViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create", null,new { @class = "btn btn-primary"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SubjectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LessonName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TopicName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TopicDescription)
+        </th>      
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubjectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LessonName)
+        </td>       
+        <td>
+            @Html.DisplayFor(modelItem => item.TopicName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TopicDescription)
+        </td>       
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TopicID },new { @class = "btn btn-primary"}) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TopicID },new { @class = "btn btn-primary"})
+        </td>
+    </tr>
+}
+
+</table>

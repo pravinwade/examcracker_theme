@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Demo.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary"})
+</p>
+
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script>
+    $(function () {
+        $("#myTable").dataTable();
+        paging: false
+        searching: false
+    });
+</script>
+
+<script defer src="~/Scripts/Math/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<div style="width:100%; margin:0 auto;">
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Lession</th>
+                <th>Question Text</th>
+                <th>Marks For Question</th>
+                <th>Difficuty Level</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+</style>
+
+@* Load datatable css *@
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+@* Load datatable js *@
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "ajax": {
+                    "url": "/Question/loaddata",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                { "data": "_subjectName", "autoWidth": true },
+                { "data": "_lession", "autoWidth": true },
+                { "data": "QuestionText", "autoWidth": true },
+                { "data": "MarksForQuestion", "autoWidth": true },
+                { "data": "_questiondifflevel", "autoWidth": true }
+                ]
+            });
+        });
+    </script>
+    }

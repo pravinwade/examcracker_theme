@@ -1,0 +1,5 @@
+C:\pravin-local\bin\Demo.dll.config
+C:\pravin-local\bin\Demo.dll
+C:\pravin-local\bin\Demo.pdb
+C:\pravin-local\obj\Release\Demo.dll
+C:\pravin-local\obj\Release\Demo.pdb
