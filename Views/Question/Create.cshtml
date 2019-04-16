@@ -9,7 +9,7 @@
         width: 100%;
     }
 </style>
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Question", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -20,7 +20,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
-                    @Html.LabelFor(model => model.SubjectID, "Subject")                    
+                    @Html.LabelFor(model => model.SubjectID, "Subject")
                 </div>
                 <div class="col-md-4">
                     @Html.DropDownListFor(model => model.SubjectID, Model.Subjects, "--Select Subject--", new { @class = "au-input au-input--full" })
@@ -38,7 +38,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
-                    @Html.LabelFor(model => model.LessonID, "Lesson")                    
+                    @Html.LabelFor(model => model.LessonID, "Lesson")
                 </div>
                 <div class="col-md-4">
                     @Html.DropDownListFor(model => model.LessonID, Model.Lessons, "--Select Lesson--", new { @class = "au-input au-input--full" })
@@ -52,10 +52,10 @@
                     @Html.DropDownListFor(model => model.TopicID, Model.Topics, "--Select Topic--", new { @class = "au-input au-input--full" })
                 </div>
             </div>
-            </div>
+        </div>
 
         <div class="form-group">
-            <div class="row">               
+            <div class="row">
 
                 <div class="col-md-2">
                     @Html.LabelFor(model => model.QuestionTypeID, "Type")
@@ -64,7 +64,7 @@
                     @Html.RadioButtonFor(model => model.QuestionTypeID, "1", new { @checked = true })
                     @Html.Label("MCQ")
                     @Html.RadioButtonFor(model => model.QuestionTypeID, "0")
-                    @Html.Label("Subjective")                   
+                    @Html.Label("Subjective")
                 </div>
                 <div class="col-md-2">
                     @Html.LabelFor(model => model.QuesDiffLevelID, "Difficulty Level")
@@ -74,7 +74,7 @@
                     @Html.ValidationMessageFor(model => model.QuesDiffLevelID)
                 </div>
             </div>
-            </div>
+        </div>
 
         <div class="form-group">
             <div class="row">
@@ -83,11 +83,11 @@
                 </div>
                 <div class="col-md-10">
                     @*@Html.TextAreaFor(model => model.QuestionText, new { style = "width:650px;resize:none; " })*@"
-                    @Html.TextAreaFor(model => model.QuestionText, new { @class = "au-input au-input--full" , @style = "width:1200px;"})
+                    @Html.TextAreaFor(model => model.QuestionText, new { @class = "au-input au-input--full", @style = "width:1200px;", @placeholder = "Question Text" })
                     @Html.ValidationMessageFor(model => model.QuestionText)
                 </div>
             </div>
-            </div>
+        </div>
 
         <div class="form-group">
             <div class="row">
@@ -95,17 +95,17 @@
                     @Html.LabelFor(model => model.QuestionImage, "Question Image", new { @class = "mycombo" })
                 </div>
                 <div class="col-md-4">
-                    <input type="file" name="name" value=" " />
+                    <input type="file" name="QImage" value=" " />
                 </div>
                 <div class="col-md-2">
                     @Html.LabelFor(model => model.MarksForQuestion, "Marks")
                 </div>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.MarksForQuestion, "", new { @class = "au-input au-input--full" })
+                    @Html.TextBoxFor(model => model.MarksForQuestion, "", new { @class = "au-input au-input--full", @placeholder = "1" })
                     @Html.ValidationMessageFor(model => model.MarksForQuestion)
                 </div>
             </div>
-            </div>
+        </div>
 
         <div class="form-group">
             <div class="row">
@@ -125,76 +125,76 @@
                     @Html.Label("Yes")
                 </div>
             </div>
-            </div>
+        </div>
 
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
-                    @Html.LabelFor(model => model.ExamTypes,"Exam ")
+                    @Html.LabelFor(model => model.ExamTypes, "Exam ")
                 </div>
-                
-                    @for (int i = 0; i < Model.ExamTypes.Count(); i++)
-                    {
-                        <div class="checkbox checkbox-success checkbox-inline">
-                            @Html.CheckBoxFor(model => model.ExamTypes[i].Selected)
-                            @Html.DisplayFor(model => model.ExamTypes[i].Text)
-                            @Html.HiddenFor(model => model.ExamTypes[i].Value)
-                            @Html.HiddenFor(model => model.ExamTypes[i].Text)
-                        </div>
-                    }
-               @Html.ValidationMessageFor(model => model.ExamTypes)
+
+                @for (int i = 0; i < Model.ExamTypes.Count(); i++)
+                {
+                    <div class="checkbox checkbox-success checkbox-inline">
+                        @Html.CheckBoxFor(model => model.ExamTypes[i].Selected)
+                        @Html.DisplayFor(model => model.ExamTypes[i].Text)
+                        @Html.HiddenFor(model => model.ExamTypes[i].Value)
+                        @Html.HiddenFor(model => model.ExamTypes[i].Text)
+                    </div>
+                }
+                @Html.ValidationMessageFor(model => model.ExamTypes)
             </div>
-            </div>
-            <br />
-            <h4>Related Answers</h4>
+        </div>
+        <br />
+        <h4>Related Answers</h4>
         <hr />
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
-                    @Html.LabelFor(model => model.Answer1.AnswerText, "Answer A", new { @class = "mycombo" })
+                    @Html.LabelFor(model => model.Answer1.AnswerText, "Answer A", new { @class = "mycombo"})
                 </div>
                 <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Answer1.AnswerText, "", new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.Answer1.AnswerText, "", new { @class = "form-control", @placeholder = "Answer A" })
                     @Html.ValidationMessageFor(model => model.Answer1.AnswerText)
                 </div>
                 <div class="col-md-1">
                     @Html.LabelFor(model => model.Answer1.AnswerImage, "OR Image", new { @class = "mycombo" })
                 </div>
                 <div class="col-md-3">
-                    <input type="file" name="Answer1Image">
+                    <input type="file" name="A1Image" value=" " />
                 </div>
-           @* </div>
-            </div>
-    <div class="form-group">
-        <div class="row">*@
+                @* </div>
+                            </div>
+                    <div class="form-group">
+                        <div class="row">*@
                 <div class="col-md-2">
                     @Html.LabelFor(model => model.Answer1.CorrectAnswer, "Correct Answer", new { @class = "mycombo" })
                 </div>
                 <div class="col-md-1">
                     @Html.CheckBoxFor(model => model.Answer1.CorrectAnswer)
                 </div>
-           </div> 
             </div>
-         
+        </div>
+
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
                     @Html.LabelFor(model => model.Answer2.AnswerText, "Answer B", new { @class = "mycombo" })
                 </div>
                 <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Answer2.AnswerText, "", new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.Answer2.AnswerText, "", new { @class = "form-control", @placeholder = "Answer B" })
                     @Html.ValidationMessageFor(model => model.Answer2.AnswerText)
                 </div>
                 <div class="col-md-1">
                     @Html.LabelFor(model => model.Answer2.AnswerImage, "OR Image", new { @class = "mycombo" })
                 </div>
                 <div class="col-md-3">
-                    <input type="file" name="Answer1Image">
+                    <input type="file" name="A2Image" value=" " />
                 </div>
-            @*</div>
-            </div>
-        <div class="form-group">
-            <div class="row">*@
+                @*</div>
+                        </div>
+                    <div class="form-group">
+                        <div class="row">*@
                 <div class="col-md-2">
                     @Html.LabelFor(model => model.Answer2.CorrectAnswer, "Correct Answer", new { @class = "mycombo" })
                 </div>
@@ -202,15 +202,15 @@
                     @Html.CheckBoxFor(model => model.Answer2.CorrectAnswer)
                 </div>
             </div>
-            </div>
-       
+        </div>
+
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
                     @Html.LabelFor(model => model.Answer3.AnswerText, "Answer C", new { @class = "mycombo" })
                 </div>
                 <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Answer3.AnswerText, "", new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.Answer3.AnswerText, "", new { @class = "form-control", @placeholder = "Answer C" })
                     @Html.ValidationMessageFor(model => model.Answer3.AnswerText)
                 </div>
 
@@ -218,12 +218,12 @@
                     @Html.LabelFor(model => model.Answer3.AnswerImage, "OR Image", new { @class = "mycombo" })
                 </div>
                 <div class="col-md-3">
-                    <input type="file" name="Answer3Image">
+                    <input type="file" name="A3Image" value=" " />
                 </div>
-            @*</div>
-            </div>
-        <div class="form-group">
-            <div class="row">*@
+                @*</div>
+                        </div>
+                    <div class="form-group">
+                        <div class="row">*@
                 <div class="col-md-2">
                     @Html.LabelFor(model => model.Answer3.CorrectAnswer, "Correct Answer", new { @class = "mycombo" })
                 </div>
@@ -231,27 +231,27 @@
                     @Html.CheckBoxFor(model => model.Answer3.CorrectAnswer)
                 </div>
             </div>
-            </div>
-           
+        </div>
+
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
                     @Html.LabelFor(model => model.Answer4.AnswerText, "Answer D", new { @class = "mycombo" })
                 </div>
                 <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Answer4.AnswerText, "", new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.Answer4.AnswerText, "", new { @class = "form-control", @placeholder = "Answer D" })
                     @Html.ValidationMessageFor(model => model.Answer4.AnswerText)
                 </div>
                 <div class="col-md-1">
                     @Html.LabelFor(model => model.Answer4.AnswerImage, "OR Image", new { @class = "mycombo" })
                 </div>
                 <div class="col-md-3">
-                    <input type="file" name="Answer4Image">
+                    <input type="file" name="A4Image" value=" " />
                 </div>
-            @*</div>
-            </div>
-        <div class="form-group">
-            <div class="row">*@
+                @*</div>
+                        </div>
+                    <div class="form-group">
+                        <div class="row">*@
                 <div class="col-md-2">
                     @Html.LabelFor(model => model.Answer4.CorrectAnswer, "Correct Answer", new { @class = "mycombo" })
                 </div>
@@ -259,16 +259,16 @@
                     @Html.CheckBoxFor(model => model.Answer4.CorrectAnswer)
                 </div>
             </div>
-            </div>
-            <br />
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-12">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </div>
-
         </div>
-}   
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-12">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
 
 
 <div>

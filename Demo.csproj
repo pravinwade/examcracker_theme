@@ -175,6 +175,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CandiateViewModel.cs" />
+    <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\DBHelper\CandidateDBHelper.cs" />
     <Compile Include="Models\DBHelper\CheckLogin.cs" />
     <Compile Include="Models\DBHelper\ClassDBHelper.cs" />
@@ -437,6 +438,12 @@
     <Content Include="Image\Candidate\Satish_Shinde20130629_134151.jpg" />
     <Content Include="Image\Candidate\Satish_Shindebarfi-heroine-ileana-hd84.jpg" />
     <Content Include="Image\no_image.jpg" />
+    <Content Include="Image\Question\0_3 %281%29.jpeg" />
+    <Content Include="Image\Question\0_3%281%29 %281%29.jpeg" />
+    <Content Include="Image\Question\0_3%281%29.jpeg" />
+    <Content Include="Image\Question\0_3%282%29.jpeg" />
+    <Content Include="Image\Question\0_3%283%29.jpeg" />
+    <Content Include="Image\Question\0_3%286%29.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="bin\Demo.dll.config" />
@@ -1981,10 +1988,11 @@
     <Content Include="Views\PaperCriteriaConfig\Create.cshtml" />
     <Content Include="Views\PaperCriteriaConfig\Index.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\Question\Create - Copy.cshtml" />
+    <Content Include="Views\Question\Edit - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Image\Question\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

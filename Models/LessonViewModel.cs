@@ -29,7 +29,7 @@ namespace Demo.Models
         public string SectionName { get; set; }
 
 
-        [Required(ErrorMessage = "This field is required !")]
+        
         public string Description { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }

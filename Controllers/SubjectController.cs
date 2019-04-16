@@ -23,6 +23,13 @@ namespace Demo.Controllers
         //}
         public ActionResult Index()
         {
+            if (Session["username"] == null)
+            {
+                ViewBag.Error = "Error";
+                RedirectToAction("Index", "Login");
+            }
+            else
+                ViewBag.Error = "";
             return View();
         }
 

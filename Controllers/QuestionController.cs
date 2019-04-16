@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Demo.Models;
 using Demo.Models.DBHelper;
+using System.IO;
 
 namespace Demo.Controllers
 {
@@ -110,6 +111,8 @@ namespace Demo.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Create(QuestionViewModel qvm)
         {
+            string filename=string.Empty, extension=string.Empty;
+
             try
             {
                 //var errors = ModelState.Values.SelectMany(v => v.Errors);
@@ -121,29 +124,80 @@ namespace Demo.Controllers
                     ans1.AnswerID = null;
                     ans1.QuestionID = null;
                     ans1.AnswerText = qvm.Answer1.AnswerText;
-                    ans1.AnswerImage = qvm.Answer1.AnswerImage;
+                   // ans1.AnswerImage = qvm.Answer1.AnswerImage;
                     ans1.SeqOfAnswer = 1;
+                    if (qvm.A1Image != null)
+                    {
+                        filename = Path.GetFileNameWithoutExtension(qvm.A1Image.FileName);
+                        extension = Path.GetExtension(qvm.A1Image.FileName);
+                        filename = qvm.QuestionID + "_" + qvm.Answer1.SeqOfAnswer + filename + extension;
+                        ans1.AnswerImage = "~/Image/Question/" + filename;
+                        filename = Path.Combine(Server.MapPath("~/Image/Question/"), filename);
+                        qvm.A1Image.SaveAs(filename);
+                    }
                     ans1.CorrectAnswer = qvm.Answer1.CorrectAnswer;
 
                     AnswerViewModel ans2 = new AnswerViewModel();
                     ans2.AnswerText = qvm.Answer2.AnswerText;
-                    ans2.AnswerImage = qvm.Answer2.AnswerImage;
+                    //ans2.AnswerImage = qvm.Answer2.AnswerImage;
                     ans2.SeqOfAnswer = 2;
+                    if (qvm.A2Image != null)
+                    {
+                        filename = Path.GetFileNameWithoutExtension(qvm.A2Image.FileName);
+                        extension = Path.GetExtension(qvm.A2Image.FileName);
+                        filename = qvm.QuestionID + "_" + qvm.Answer2.SeqOfAnswer + filename + extension;
+                        ans2.AnswerImage = "~/Image/Question/" + filename;
+                        filename = Path.Combine(Server.MapPath("~/Image/Question/"), filename);
+                        qvm.A2Image.SaveAs(filename);
+                    }
                     ans2.CorrectAnswer = qvm.Answer2.CorrectAnswer;
 
                     AnswerViewModel ans3 = new AnswerViewModel();
                     ans3.AnswerText = qvm.Answer3.AnswerText;
-                    ans3.AnswerImage = qvm.Answer3.AnswerImage;
+                    //ans3.AnswerImage = qvm.Answer3.AnswerImage;
                     ans3.SeqOfAnswer = 3;
+                    if (qvm.A3Image != null)
+                    {
+                        filename = Path.GetFileNameWithoutExtension(qvm.A3Image.FileName);
+                        extension = Path.GetExtension(qvm.A3Image.FileName);
+                        filename = qvm.QuestionID + "_" + qvm.Answer3.SeqOfAnswer + filename + extension;
+                        ans3.AnswerImage = "~/Image/Question/" + filename;
+                        filename = Path.Combine(Server.MapPath("~/Image/Question/"), filename);
+                        qvm.A3Image.SaveAs(filename);
+                    }
                     ans3.CorrectAnswer = qvm.Answer3.CorrectAnswer;
 
                     AnswerViewModel ans4 = new AnswerViewModel();
                     ans4.AnswerText = qvm.Answer4.AnswerText;
-                    ans4.AnswerImage = qvm.Answer4.AnswerImage;
+                    //ans4.AnswerImage = qvm.Answer4.AnswerImage;
                     ans4.SeqOfAnswer = 4;
+                    if (qvm.A4Image != null)
+                    {
+                        filename = Path.GetFileNameWithoutExtension(qvm.A4Image.FileName);
+                        extension = Path.GetExtension(qvm.A4Image.FileName);
+                        filename = qvm.QuestionID + "_" + qvm.Answer4.SeqOfAnswer + filename + extension;
+                        ans4.AnswerImage = "~/Image/Question/" + filename;
+                        filename = Path.Combine(Server.MapPath("~/Image/Question/"), filename);
+                        qvm.A4Image.SaveAs(filename);
+                    }
                     ans4.CorrectAnswer = qvm.Answer4.CorrectAnswer;
 
                     List<AnswerViewModel> ansList = new List<AnswerViewModel>();
+
+                    if (qvm.QImage != null)
+                    {
+                        filename = Path.GetFileNameWithoutExtension(qvm.QImage.FileName);
+                        extension = Path.GetExtension(qvm.QImage.FileName);
+                        filename = qvm.QuestionID + "_" + qvm.QuestionTypeName + filename + extension;
+                        qvm.QuestionImage = "~/Image/Question/" + filename;
+                        filename = Path.Combine(Server.MapPath("~/Image/Question/"), filename);
+                        qvm.QImage.SaveAs(filename);
+                    }
+                    //else
+                    //{
+                    //    objCandidate.Photo = "~/Image/no_image.jpg";
+                    //}
+
 
                     ansList.Add(ans1);
                     ansList.Add(ans2);
@@ -174,7 +228,20 @@ namespace Demo.Controllers
         public ActionResult Edit(int id)
         {
             QuestionDBHelper objDB = new QuestionDBHelper();
-            return View(objDB.GetQuestionAnswerByID(id));
+            QuestionViewModel qvm = objDB.GetQuestionAnswerByID(id);
+            var qimg = qvm.QuestionImage;
+            var a1img=qvm.Answer1.AnswerImage;
+            var a2img=qvm.Answer2.AnswerImage;
+            var a3img=qvm.Answer3.AnswerImage;
+            var a4img=qvm.Answer4.AnswerImage;
+
+            TempData["Qimg"] = qimg.ToString();
+            TempData["A1img"] = a1img.ToString();
+            TempData["A2img"] = a2img.ToString();
+            TempData["A3img"] = a3img.ToString();
+            TempData["A4img"] = a4img.ToString();
+
+            return View(qvm);
         }
 
         // POST: /Question/Edit/5
@@ -182,38 +249,99 @@ namespace Demo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, QuestionViewModel quesVm)
         {
+            string filename = string.Empty, extension = string.Empty,imageURL=string.Empty;
             try
             {
                 QuestionDBHelper objQB = new QuestionDBHelper();
 
+                imageURL = TempData["A1img"].ToString();                        
                 AnswerViewModel ans1 = new AnswerViewModel();
                 ans1.AnswerID = null;
                 ans1.QuestionID = quesVm.QuestionID;
                 ans1.AnswerText = quesVm.Answer1.AnswerText;
                 ans1.AnswerImage = quesVm.Answer1.AnswerImage;
                 ans1.SeqOfAnswer = 1;
+                if (quesVm.A1Image != null)
+                {
+                    filename = Path.GetFileNameWithoutExtension(quesVm.A1Image.FileName);
+                    extension = Path.GetExtension(quesVm.A1Image.FileName);
+                    filename = quesVm.QuestionID + "_" + quesVm.Answer1.SeqOfAnswer + filename + extension;
+                    ans1.AnswerImage = "~/Image/Question/" + filename;
+                    filename = Path.Combine(Server.MapPath("~/Image/Question/"), filename);
+                    quesVm.A1Image.SaveAs(filename);
+                }
+                else if (imageURL != string.Empty)
+                {
+                    ans1.AnswerImage = imageURL;
+                }
                 ans1.CorrectAnswer = quesVm.Answer1.CorrectAnswer;
+                imageURL = string.Empty;
 
+                imageURL = TempData["A2img"].ToString();   
                 AnswerViewModel ans2 = new AnswerViewModel();
                 ans2.QuestionID = quesVm.QuestionID;
                 ans2.AnswerText = quesVm.Answer2.AnswerText;
                 ans2.AnswerImage = quesVm.Answer2.AnswerImage;
                 ans2.SeqOfAnswer = 2;
+                if (quesVm.A2Image != null)
+                {
+                    filename = Path.GetFileNameWithoutExtension(quesVm.A2Image.FileName);
+                    extension = Path.GetExtension(quesVm.A2Image.FileName);
+                    filename = quesVm.QuestionID + "_" + quesVm.Answer2.SeqOfAnswer + filename + extension;
+                    ans2.AnswerImage = "~/Image/Question/" + filename;
+                    filename = Path.Combine(Server.MapPath("~/Image/Question/"), filename);
+                    quesVm.A2Image.SaveAs(filename);
+                }
+                else if (imageURL != string.Empty)
+                {
+                    ans2.AnswerImage = imageURL;
+                }
                 ans2.CorrectAnswer = quesVm.Answer2.CorrectAnswer;
+                imageURL = string.Empty;
 
+                imageURL = TempData["A3img"].ToString();  
                 AnswerViewModel ans3 = new AnswerViewModel();
                 ans3.QuestionID = quesVm.QuestionID;
                 ans3.AnswerText = quesVm.Answer3.AnswerText;
                 ans3.AnswerImage = quesVm.Answer3.AnswerImage;
                 ans3.SeqOfAnswer = 3;
+                if (quesVm.A3Image != null)
+                {
+                    filename = Path.GetFileNameWithoutExtension(quesVm.A3Image.FileName);
+                    extension = Path.GetExtension(quesVm.A3Image.FileName);
+                    filename = quesVm.QuestionID + "_" + quesVm.Answer3.SeqOfAnswer + filename + extension;
+                    ans3.AnswerImage = "~/Image/Question/" + filename;
+                    filename = Path.Combine(Server.MapPath("~/Image/Question/"), filename);
+                    quesVm.A3Image.SaveAs(filename);
+                }
+                else if (imageURL != string.Empty)
+                {
+                    ans3.AnswerImage = imageURL;
+                }
                 ans3.CorrectAnswer = quesVm.Answer3.CorrectAnswer;
+                imageURL = string.Empty;
 
+                imageURL = TempData["A4img"].ToString();  
                 AnswerViewModel ans4 = new AnswerViewModel();
                 ans4.QuestionID = quesVm.QuestionID;
                 ans4.AnswerText = quesVm.Answer4.AnswerText;
                 ans4.AnswerImage = quesVm.Answer4.AnswerImage;
                 ans4.SeqOfAnswer = 4;
+                if (quesVm.A4Image != null)
+                {
+                    filename = Path.GetFileNameWithoutExtension(quesVm.A4Image.FileName);
+                    extension = Path.GetExtension(quesVm.A4Image.FileName);
+                    filename = quesVm.QuestionID + "_" + quesVm.Answer4.SeqOfAnswer + filename + extension;
+                    ans4.AnswerImage = "~/Image/Question/" + filename;
+                    filename = Path.Combine(Server.MapPath("~/Image/Question/"), filename);
+                    quesVm.A4Image.SaveAs(filename);
+                }
+                else if (imageURL != string.Empty)
+                {
+                    ans4.AnswerImage = imageURL;
+                }
                 ans4.CorrectAnswer = quesVm.Answer4.CorrectAnswer;
+                imageURL = string.Empty;
 
                 List<AnswerViewModel> ansList = new List<AnswerViewModel>();
 
@@ -223,6 +351,21 @@ namespace Demo.Controllers
                 ansList.Add(ans4);
 
                 quesVm.Answers = ansList;
+
+                imageURL = TempData["Qimg"].ToString();
+                if (quesVm.QImage != null)
+                {
+                    filename = Path.GetFileNameWithoutExtension(quesVm.QImage.FileName);
+                    extension = Path.GetExtension(quesVm.QImage.FileName);
+                    filename = quesVm.QuestionID + "_" + quesVm.QuestionTypeName + filename + extension;
+                    quesVm.QuestionImage = "~/Image/Question/" + filename;
+                    filename = Path.Combine(Server.MapPath("~/Image/Question/"), filename);
+                    quesVm.QImage.SaveAs(filename);
+                }
+                else if(imageURL!=string.Empty)
+                {
+                    quesVm.QuestionImage = imageURL;
+                }
 
                 bool result = objQB.Update(quesVm);
                 return RedirectToAction("Index");

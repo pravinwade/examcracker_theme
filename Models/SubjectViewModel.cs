@@ -14,6 +14,7 @@ namespace Demo.Models
 
         [Display(Name = "Subject")]
         [Required(ErrorMessage = "This field is required !")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter only characters !")]
         public string SubjectName { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
 

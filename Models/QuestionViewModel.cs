@@ -88,7 +88,14 @@ namespace Demo.Models
 
         public AnswerViewModel Answer4 { get; set; }
 
-        public List<AnswerViewModel> Answers { get; set; }        
+        public List<AnswerViewModel> Answers { get; set; }
+
+        public HttpPostedFileBase QImage { get; set; }
+
+        public HttpPostedFileBase A1Image { get; set; }
+        public HttpPostedFileBase A2Image { get; set; }
+        public HttpPostedFileBase A3Image { get; set; }
+        public HttpPostedFileBase A4Image { get; set; }
     }
 
     public class AnswerViewModel
@@ -101,5 +108,7 @@ namespace Demo.Models
         public string AnswerText { get; set; }
         public string AnswerImage { get; set; }
         public bool Active { get; set; }
+
+       
     }
 }

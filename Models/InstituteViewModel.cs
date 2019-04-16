@@ -11,6 +11,7 @@ namespace Demo.Models
     public class InstituteViewModel
     {
         [Key]
+        [Display(Name = "Institute")]
         public int InstituteID { get; set; }
 
         [MaxLength(150)]
@@ -37,6 +38,8 @@ namespace Demo.Models
         public string EmailID { get; set; }
         public Nullable<bool> Active { get; set; }
 
+        [Display(Name = "Logo")]
+        public string Logo { get; set; }
         public List<SelectListItem> States { get; set; }
 
         [Display(Name = "Exam")]

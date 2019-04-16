@@ -90,3 +90,14 @@ C:\pravin-local\bin\Demo.pdb
 C:\pravin-local\obj\Debug\Demo.dll
 C:\pravin-local\obj\Debug\Demo.pdb
 C:\pravin-local\obj\Debug\Demo.csprojResolveAssemblyReference.cache
+C:\1MyProjects\OnlineExamLatest\newfile-09apr2019-fromserver\bin\Demo.dll.config
+C:\1MyProjects\OnlineExamLatest\newfile-09apr2019-fromserver\bin\Demo.dll
+C:\1MyProjects\OnlineExamLatest\newfile-09apr2019-fromserver\bin\Demo.pdb
+C:\1MyProjects\OnlineExamLatest\newfile-09apr2019-fromserver\obj\Debug\Demo.dll
+C:\1MyProjects\OnlineExamLatest\newfile-09apr2019-fromserver\obj\Debug\Demo.pdb
+C:\1MyProjects\OnlineExamLatest\newfile_from_server_15Apr\bin\Demo.dll.config
+C:\1MyProjects\OnlineExamLatest\newfile_from_server_15Apr\bin\Demo.dll
+C:\1MyProjects\OnlineExamLatest\newfile_from_server_15Apr\bin\Demo.pdb
+C:\1MyProjects\OnlineExamLatest\newfile_from_server_15Apr\obj\Debug\Demo.csprojResolveAssemblyReference.cache
+C:\1MyProjects\OnlineExamLatest\newfile_from_server_15Apr\obj\Debug\Demo.dll
+C:\1MyProjects\OnlineExamLatest\newfile_from_server_15Apr\obj\Debug\Demo.pdb

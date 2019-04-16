@@ -21,7 +21,7 @@
                     @Html.LabelFor(model => model.SubjectID) 
                 </div>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.SubjectID, Model.Subjects,"--Select Section--", new { @class = "au-input au-input--full" }))
+                    @Html.DropDownListFor(model => model.SubjectID, Model.Subjects,"--Select Section--", new { @class = "au-input au-input--full" })
                     @Html.ValidationMessageFor(model => model.SubjectID)
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     @Html.LabelFor(model => model.SectionName) 
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.SectionName, new { @class = "au-input au-input--full" }))
+                    @Html.TextBoxFor(model => model.SectionName, new { @class = "au-input au-input--full" })
                     @Html.ValidationMessageFor(model => model.SectionName)
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     @Html.LabelFor(model => model.Description) 
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description, new { @class = "au-input au-input--full" }))
+                    @Html.TextBoxFor(model => model.Description, new { @class = "au-input au-input--full" })
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
             </div>

@@ -50,7 +50,7 @@
                     @Html.LabelFor(model => model.LessonName)
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.LessonName, new { @class = "au-input au-input--full" })
+                    @Html.TextBoxFor(model => model.LessonName, new { @class = "au-input au-input--full" })
                     @Html.ValidationMessageFor(model => model.LessonName)
                 </div>
             </div>
@@ -62,7 +62,7 @@
                     @Html.LabelFor(model => model.Description)
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description, new { @class = "au-input au-input--full" })
+                    @Html.TextBoxFor(model => model.Description, new { @class = "au-input au-input--full" })
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
             </div>

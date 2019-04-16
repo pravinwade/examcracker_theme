@@ -4,11 +4,27 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>*@
+
+@*<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@
+
 <style>
     .mycombo {
         width: 100%;
     }
 </style>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        
+        jQuery("#DateOfBirth").datepicker(
+           { dateFormat: 'yy-mm-dd' }
+        );
+    });
+</script>
+
+  
 @using (Html.BeginForm("Create","Candidate",FormMethod.Post,new {enctype="multipart/form-data"})) 
 {
     @Html.AntiForgeryToken()
@@ -24,6 +40,7 @@
                 </div>
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.InstituteID, Model.Institutes, "--Select Institute--", new { @class = "au-input au-input--full"})       
+                    @Html.ValidationMessageFor(model => model.InstituteID)
                 </div>
             </div>
         </div>
@@ -33,7 +50,7 @@
                     @Html.LabelFor(model => model.FName)       
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.FName, new { @class = "au-input au-input--full" })       
+                    @Html.TextBoxFor(model => model.FName, new { @class = "au-input au-input--full", @placeholder = "First Name" })
                     @Html.ValidationMessageFor(model => model.FName)
                 </div>
             </div>
@@ -45,7 +62,7 @@
                     @Html.LabelFor(model => model.MName)       
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.MName, new { @class = "au-input au-input--full" })
+                    @Html.TextBoxFor(model => model.MName, new { @class = "au-input au-input--full", @placeholder = "Middle Name" })
                     @Html.ValidationMessageFor(model => model.MName)
                 </div>
             </div>
@@ -57,7 +74,7 @@
                     @Html.LabelFor(model => model.LName)       
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.LName, new { @class = "au-input au-input--full" })
+                    @Html.TextBoxFor(model => model.LName, new { @class = "au-input au-input--full", @placeholder = "Last Name" })
                     @Html.ValidationMessageFor(model => model.LName)
                 </div>
             </div>
@@ -69,7 +86,7 @@
                     @Html.LabelFor(model => model.Address)       
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Address, new { @class = "au-input au-input--full" })
+                    @Html.TextBoxFor(model => model.Address, new { @class = "au-input au-input--full", @placeholder = "Address" })
                     @Html.ValidationMessageFor(model => model.Address)
                 </div>
             </div>
@@ -81,6 +98,7 @@
                     </div>
                     <div class="col-md-10">
                         @Html.DropDownListFor(model => model.StateID, Model.States, "--Select State--", new { @class = "au-input au-input--full"})     
+                        @Html.ValidationMessageFor(model => model.StateID)
                     </div>
                 </div>
             </div>
@@ -90,7 +108,7 @@
                     @Html.LabelFor(model => model.City)       
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.City, new { @class = "au-input au-input--full" })
+                    @Html.TextBoxFor(model => model.City, new { @class = "au-input au-input--full", @placeholder = "City" })
                     @Html.ValidationMessageFor(model => model.City)
                 </div>
             </div>
@@ -101,7 +119,7 @@
                     @Html.LabelFor(model => model.AdharCardNo)       
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.AdharCardNo, new { @class = "au-input au-input--full" })
+                    @Html.TextBoxFor(model => model.AdharCardNo, new { @class = "au-input au-input--full", @placeholder = "Adhar Number" })
                     @Html.ValidationMessageFor(model => model.AdharCardNo)
                 </div>
             </div>
@@ -113,7 +131,7 @@
                     @Html.LabelFor(model => model.DateOfBirth)       
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.DateOfBirth, new { @class = "au-input au-input--full" })
+                    @Html.EditorFor(model => model.DateOfBirth, new { @class = "au-input au-input--full", @placeholder = "DOB" })
                     @Html.ValidationMessageFor(model => model.DateOfBirth)
                 </div>
             </div>
@@ -125,7 +143,7 @@
                     @Html.LabelFor(model => model.Mobile)       
                     </div>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Mobile, new { @class = "au-input au-input--full" })
+                        @Html.TextBoxFor(model => model.Mobile, new { @class = "au-input au-input--full", @placeholder = "Mobile Number" })
                         @Html.ValidationMessageFor(model => model.Mobile)
                     </div>
                 </div>
@@ -141,6 +159,7 @@
                         @Html.RadioButtonFor(model => model.Gender, "M", new { @class = "au-input au-input--full" })
                         Female
                         @Html.RadioButtonFor(model => model.Gender, "F", new { @class = "au-input au-input--full" })
+
                     </div>
                 </div>
             </div>
@@ -163,7 +182,7 @@
                 @Html.LabelFor(model => model.EmailID)       
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.EmailID, new { @class = "au-input au-input--full" })
+                    @Html.TextBoxFor(model => model.EmailID, new { @class = "au-input au-input--full", @placeholder = "Email ID" })
                     @Html.ValidationMessageFor(model => model.EmailID)
                 </div>
             </div>
@@ -174,7 +193,7 @@
                 @Html.LabelFor(model => model.CollegeName)       
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.CollegeName, new { @class = "au-input au-input--full" })
+                    @Html.TextBoxFor(model => model.CollegeName, new { @class = "au-input au-input--full", @placeholder = "College Name" })
                     @Html.ValidationMessageFor(model => model.CollegeName)
                 </div>
             </div>
@@ -186,6 +205,7 @@
                 </div>
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.ClassID, Model.Class, "--Select Class--", new { @class = "au-input au-input--full"})     
+                    @Html.ValidationMessageFor(model => model.ClassID)
                 </div>
             </div>
         </div>

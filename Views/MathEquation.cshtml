@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EquationFormula, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EquationFormula)
+                @Html.TextBoxFor(model => model.EquationFormula)
                 @Html.ValidationMessageFor(model => model.EquationFormula)
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Remarks, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Remarks)
+                @Html.TextBoxFor(model => model.Remarks)
                 @Html.ValidationMessageFor(model => model.Remarks)
             </div>
         </div>

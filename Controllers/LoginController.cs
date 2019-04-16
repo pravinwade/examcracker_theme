@@ -13,30 +13,34 @@ namespace Demo.Controllers
         //
         // GET: /Login/
         public ActionResult Index()
-        {
+        {         
             return View();
         }
+
+        //[HttpGet]
+        //public ActionResult Login()
+        //{
+        //    return View();
+        //}
+
         [HttpPost]
         public ActionResult Login(LoginViewModel login)
         {
             CheckLogin objCheck= new CheckLogin();
             var chk = objCheck.LoginDetails(login);
-            if (chk != null)
+            if (chk != null && chk.Count > 0)
             {
-                if (chk.Count > 0)
-                {
-                    Session["username"] = chk[0].UserName;
-                    Session["roleid"] = chk[0].Roleid;
-                    Session["email"] = chk[0].Email;
-                    return RedirectToAction("Index", "Home");
-                }
+                Session["username"] = chk[0].UserName;
+                Session["roleid"] = chk[0].Roleid;
+                Session["email"] = chk[0].Email;
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                //if user not valid then simply showing error message
-                Response.Write("Not Valid User");
-                
-            }return RedirectToAction("Login"); 
+                TempData["LoginMessage"] = "Please enter valid user id and password";
+                return RedirectToAction("Index", ViewBag); 
+               // return View();
+            }
         }
         public ActionResult LogOut()
         {

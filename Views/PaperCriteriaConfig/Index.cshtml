@@ -1,63 +1,187 @@
-﻿@model IEnumerable<Demo.Models.PaperCriteriaConfigViewModel>
+﻿@model Demo.Models.PaperCriteriaConfigViewModel
 
-<p>
-    @Html.ActionLink("Add New Paper Criteria", "Create", null, new { @class = "btn btn-primary" })
-</p>
-<table class="table table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ExamTypeID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InstituteID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DefaultCriteria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubjectID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SectionID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LessonID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TopicID)
-        </th>
-        <th></th>
-    </tr>
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-    @*@foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExamTypeID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InstituteID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DefaultCriteria)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SubjectID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SectionID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LessonID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TopicID)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-        }*@
+<!DOCTYPE html>
 
-</table>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "PaperCriteriaConfig", FormMethod.Post))
+    {
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Configuration for</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.RadioButton("Configuration", "Institute", true)  Institute
+                    @Html.RadioButton("Configuration", "Candidate")  Candidate
+            </div>
+        </div>  
+            </div>
+         <hr />
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Exam Type</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.ExamTypeID, Model.ExamTypes, "Please select", new { @class = "au-input au-input--full" })</div>
+            </div>
+        </div>   
+        
+         <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Institute</label>
+                </div>
+                <div class="col-md-10">
+                   @Html.DropDownListFor(m => m.InstituteID, Model.Institutes, "Please select", new { @class = "au-input au-input--full" })
+                </div>
+            </div>
+        </div>   
+         <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Candidate</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.CandidateID, Model.Candidates, "Please select", new { @class = "au-input au-input--full" })
+                </div>
+            </div>
+        </div>   
+        <hr />
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Default Criteria</label>
+                </div>
+                <div class="col-md-10">
+                    @Html.RadioButton("Criteria", "Yes", true)  Yes
+                    @Html.RadioButton("Criteria", "No")  No
+                </div>
+            </div>  
+        </div>
+   
+          <hr />
+       <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Que Difficulty Level </label></div>
+                </div>
+        </div>
+         <hr />
+    }
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("select").each(function () {
+                if ($(this).find("option").length <= 1) {
+                    $(this).attr("disabled", "disabled");
+                }
+            });
+
+            $("select").change(function () {
+                var value = 0;
+                if ($(this).val() != "") {
+                    value = $(this).val();
+                }
+                var id = $(this).attr("id");
+                $.ajax({
+                    type: "POST",
+                    url: "/PaperCriteriaConfig/AjaxMethod",
+                    data: '{type: "' + id + '", value: ' + value + '}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var dropDownId;
+                        var list;
+                        switch (id) {
+                            case "ExamTypeID":
+                                list = response.Institutes;
+                                DisableDropDown("#InstituteID");
+                                DisableDropDown("#CandidateID");
+                                PopulateDropDown("#InstituteID", list);
+                                break;
+                            case "InstituteID":
+                                dropDownId = "#CandidateID";
+                                list = response.Candidates;
+                                DisableDropDown("#CandidateID");
+                                PopulateDropDown("#CandidateID", list);
+                                break;
+                        }
+
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            });
+        });
+
+        function DisableDropDown(dropDownId) {
+            $(dropDownId).attr("disabled", "disabled");
+            $(dropDownId).empty().append('<option selected="selected" value="0">Please select</option>');
+        }
+
+        function PopulateDropDown(dropDownId, list) {
+            if (list != null && list.length > 0) {
+                $(dropDownId).removeAttr("disabled");
+                $.each(list, function () {
+                    $(dropDownId).append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            }
+        }
+
+        $(function () {
+            if ($("#ExamTypeID").val() != "" && $("#InstituteID").val() != "" && $("#CandidateID").val() != "") {
+                var message = "ExamType: " + $("#ExamTypeID option:selected").text();
+                message += "\Institute: " + $("#InstituteID option:selected").text();
+                message += "\Candidate: " + $("#CandidateID option:selected").text();
+                alert(message);
+            }
+        });
+    </script>
+    
+  @*  <h4>Criteria:</h4>
+    <div id="dvCriteria" style="width: 50%%; height: 130px; display:none">
+    </div>
+    <h1>Second Partial View</h1>
+    <div id="dvProductDetails" style="width: 50%; height: 130px; display:none">
+    </div>*@
+    @*<script type="text/javascript">
+        $.ajax({
+            url: '/PaperCriteriaConfig/GetCriteriaDetails',
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html'
+        })
+        .success(function (result) {
+            $('#dvCriteria').html(result);
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        })
+    </script>*@  
+
+    <div class="row">
+        <div class="col-sm-9 text-center">
+            <button type="submit" class="btn btn-primary btn-md">Save Criteria</button>
+            <button class="btn btn-primary btn-md">Reset</button>
+            <button class="btn btn-danger btn-md">Generate Paper</button>
+
+        </div>
+    </div>
+
+</body>
+</html>

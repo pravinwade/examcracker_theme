@@ -247,8 +247,9 @@ namespace Demo.Models.DBHelper
                     ques.LessonID = Convert.ToInt32(ds.Tables[0].Rows[i]["LessonID"]);
                     ques.lesson = Convert.ToString(ds.Tables[0].Rows[i]["LessonName"]);
                     ques.TopicID = Convert.ToInt32(ds.Tables[0].Rows[i]["TopicID"]);
-                    ques.topic = ds.Tables[0].Rows[i]["TopicName"].ToString();
-                    ques.QuestionText = ds.Tables[0].Rows[i]["QuestionText"].ToString();
+                    ques.topic = Convert.ToString(ds.Tables[0].Rows[i]["TopicName"]);
+                    ques.QuestionText = Convert.ToString(ds.Tables[0].Rows[i]["QuestionText"]);
+                    ques.QuestionImage = Convert.ToString(ds.Tables[0].Rows[i]["QuestionImage"]);
                     ques.MarksForQuestion = Convert.ToInt32(ds.Tables[0].Rows[i]["MarksForQuestion"].ToString());
                     ques.QuesDiffLevelID = Convert.ToInt32(ds.Tables[0].Rows[i]["QuesDiffLevelID"]);  
                     ques.questiondifflevel = ds.Tables[0].Rows[i]["QuestionDiffLevel"].ToString();
@@ -256,6 +257,10 @@ namespace Demo.Models.DBHelper
                     ques.QuestionTypeName = Convert.ToString(ds.Tables[0].Rows[i]["QuestionType"]);                    
                     ques.QuestionSourceId = Convert.ToInt32(ds.Tables[0].Rows[i]["QuestionSourceId"]);
                     ques.QuestionSourceName = Convert.ToString(ds.Tables[0].Rows[i]["QuestionSource"]);
+                    if(ques.QuestionImage=="")
+                        ques.QuestionImage = "~/Image/test1.jpg";
+
+
                 }
                
                 for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
@@ -266,6 +271,8 @@ namespace Demo.Models.DBHelper
                     ans.SeqOfAnswer = Convert.ToInt32(ds.Tables[1].Rows[i]["SeqOfAnswer"].ToString());
                     ans.AnswerText = Convert.ToString(ds.Tables[1].Rows[i]["AnswerText"]);
                     ans.AnswerImage = Convert.ToString(ds.Tables[1].Rows[i]["AnswerImage"]);
+                    if (ans.AnswerImage == "")
+                        ans.AnswerImage = "~/Image/no_image1.jpg";
                     ans.CorrectAnswer = Convert.ToBoolean(ds.Tables[1].Rows[i]["CorrectAnswer"]);
                     ans.Active = Convert.ToBoolean(ds.Tables[1].Rows[i]["Active"]);
 

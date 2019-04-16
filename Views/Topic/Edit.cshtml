@@ -54,7 +54,7 @@
                     @Html.LabelFor(model => model.TopicName)
                    </div>
                      <div class="col-md-10">
-                        @Html.EditorFor(model => model.TopicName, new { @class = "au-input au-input--full" })
+                        @Html.TextBoxFor(model => model.TopicName, new { @class = "au-input au-input--full" })
                         @Html.ValidationMessageFor(model => model.TopicName)
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                     @Html.LabelFor(model => model.TopicDescription)
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.TopicDescription, new { @class = "au-input au-input--full" })
+                    @Html.TextBoxFor(model => model.TopicDescription, new { @class = "au-input au-input--full" })
                     @Html.ValidationMessageFor(model => model.TopicDescription)
                 </div>
             </div>

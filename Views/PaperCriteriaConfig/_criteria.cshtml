@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Demo.Models.PaperCriteriaConfigViewModel>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <table >  
+<tr>  
+<th>Product Name</th>  
+<th>ManufacturedDate</th>  
+</tr>  
+@foreach (var item in Model)  
+{  
+<tr>  
+<td> @item.SubjectID</td>  
+<td> @item.ExamTypeID</td>  
+</tr>  
+}  
+</table>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

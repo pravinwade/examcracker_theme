@@ -33,7 +33,14 @@ namespace Demo.Controllers
 
         public ActionResult Index()
         {
-           return View();
+            if (Session["username"] == null)
+            {
+                ViewBag.Error = "Error";
+                RedirectToAction("Index", "Login");
+            }
+            else
+                ViewBag.Error = "";
+            return View();
         }
 
         public ActionResult loaddata()

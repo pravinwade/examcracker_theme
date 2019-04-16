@@ -109,17 +109,21 @@ namespace Demo.Controllers
         public ActionResult Edit(int id)
         {
             CandidateDBHelper objDB = new CandidateDBHelper();
-            return View(objDB.Details().Find(cmodel => cmodel.CandidateID == id));
+            CandiateViewModel cmodel = objDB.Details().Find(cmodel1 => cmodel1.CandidateID == id);
+            var cimg = cmodel.Photo;
+            TempData["Cimg"] = cimg.ToString();
+            return View(cmodel);
         }
 
 
         [HttpPost]
         public ActionResult Edit(int id, CandiateViewModel cmodel)
         {
+            string imageURL = string.Empty;
             try
             {
                 CandidateDBHelper objDB = new CandidateDBHelper();
-
+                imageURL = TempData["Cimg"].ToString(); 
                 if (cmodel.CandImage != null)
                 {
                     string filename = Path.GetFileNameWithoutExtension(cmodel.CandImage.FileName);
@@ -129,9 +133,9 @@ namespace Demo.Controllers
                     filename = Path.Combine(Server.MapPath("~/Image/Candidate/"), filename);
                     cmodel.CandImage.SaveAs(filename);
                 }
-                else
+                else if (imageURL != string.Empty)
                 {
-                    cmodel.Photo = "~/Image/no_image.jpg";
+                    cmodel.Photo = imageURL;
                 }
 
                 objDB.Update(cmodel);

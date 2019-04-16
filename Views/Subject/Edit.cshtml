@@ -21,10 +21,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
-                    @Html.LabelFor(model => model.ClassID, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.ClassID)
                 </div>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.ClassID, Model.Class, "--Select Class--")
+                    @Html.DropDownListFor(model => model.ClassID, Model.Class, "--Select Class--",new { @class = "au-input au-input--full" })
                     @Html.ValidationMessageFor(model => model.ClassID)
                 </div>
             </div>
@@ -33,10 +33,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
-                    @Html.LabelFor(model => model.SubjectName, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.SubjectName)
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.SubjectName)
+                    @Html.TextBoxFor(model => model.SubjectName, new { @class = "au-input au-input--full" })
                     @Html.ValidationMessageFor(model => model.SubjectName)
                 </div>
             </div>
@@ -45,10 +45,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
-                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Description)
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description)
+                    @Html.TextBoxFor(model => model.Description, new { @class = "au-input au-input--full" })
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
             </div>

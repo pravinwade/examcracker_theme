@@ -8,8 +8,8 @@
     @Scripts.Render("~/bundles/modernizr")
     <script defer src=""></script>
     <script src="../Scripts/Math/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link href="~/Content/css/theme.css" rel="stylesheet" />
-    <link href="~/Content/css/font-face.css" rel="stylesheet" />
+    @*<link href="~/Content/css/theme.css" rel="stylesheet" />
+    <link href="~/Content/css/font-face.css" rel="stylesheet" />*@
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,22 +19,22 @@
     <!-- Title Page-->
     <title>Dashboard</title>
     <!-- Fontfaces CSS-->
-    <link href="../Content/css/font-face.css" rel="stylesheet" media="all">
-    <link href="../Content/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="../Content/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="../Content/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/css/font-face.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <!-- Bootstrap CSS-->
-    <link href="../Content/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
     <!-- Vendor CSS-->
-    <link href="../Content/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="../Content/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="../Content/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="../Content/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="../Content/vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="../Content/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="../Content/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
     <!-- Main CSS-->
-    <link href="../Content/css/theme.css" rel="stylesheet" media="all">
+    <link href="~/Content/css/theme.css" rel="stylesheet" media="all">
 </head>
 @*<body class="animsition">*@
     <body >
@@ -45,7 +45,7 @@
                     <div class="container-fluid">
                         <div class="header-mobile-inner">
                             <a class="logo" href="index.html">
-                                @*<img src="../Content/images/icon/logo.png" alt="CoolAdmin" />*@
+                                @*<img src="~/Content/images/icon/logo.png" alt="CoolAdmin" />*@
                                 <h3>EXAMCracker</h3>
                             </a>
                             <button class="hamburger hamburger--slider" type="button">
@@ -128,7 +128,7 @@
             <aside class="menu-sidebar d-none d-lg-block">
                 <div class="logo">
                     <a href="#">
-                        @*<img src="../Content/images/icon/logo.png" alt="Cool Admin" />*@
+                        @*<img src="~/Content/images/icon/logo.png" alt="Cool Admin" />*@
                         <h3>EXAMCracker</h3>
                     </a>
                 </div>
@@ -218,7 +218,7 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="../Content/images/icon/avatar-01.jpg" alt="John Doe" />
+                                            <img src="~/Content/images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">@if ((Session["username"]!=null) ||(Session["username"]!="")) 
@@ -232,7 +232,7 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="../Content/images/icon/avatar-01.jpg" alt="John Doe" />
+                                                        <img src="~/Content/images/icon/avatar-01.jpg" alt="John Doe" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -286,27 +286,27 @@
         </div>
     </div>
     <!-- Jquery JS-->
-    <script src="../Content/vendor/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
-    <script src="../Content/vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="../Content/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="~/Content/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="../Content/vendor/slick/slick.min.js">
+    <script src="~/Content/vendor/slick/slick.min.js">
     </script>
-    <script src="../Content/vendor/wow/wow.min.js"></script>
-    <script src="../Content/vendor/animsition/animsition.min.js"></script>
-    <script src="../Content/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    <script src="~/Content/vendor/wow/wow.min.js"></script>
+    <script src="~/Content/vendor/animsition/animsition.min.js"></script>
+    <script src="~/Content/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
     </script>
-    <script src="../Content/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="../Content/vendor/counter-up/jquery.counterup.min.js">
+    <script src="~/Content/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="~/Content/vendor/counter-up/jquery.counterup.min.js">
     </script>
-    <script src="../Content/vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="../Content/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../Content/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="../Content/vendor/select2/select2.min.js">
+    <script src="~/Content/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="~/Content/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/Content/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="~/Content/vendor/select2/select2.min.js">
     </script>
     <!-- Main JS-->
-    <script src="../Content/js/main.js"></script>
+    <script src="~/Content/js/main.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

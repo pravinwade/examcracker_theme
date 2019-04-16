@@ -30,6 +30,7 @@ namespace Demo.Models.DBHelper
                 cmd.Parameters.AddWithValue("@Phone", objIns.Phone);
                 cmd.Parameters.AddWithValue("@Mobile", objIns.Mobile);
                 cmd.Parameters.AddWithValue("@EmailId", objIns.EmailID);
+                cmd.Parameters.AddWithValue("@InstituteLogo", objIns.Logo);
 
                 DataTable dt = new DataTable();
 
@@ -79,15 +80,15 @@ namespace Demo.Models.DBHelper
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     InstituteViewModel iobj = new InstituteViewModel();
-                    iobj.InstituteID = Convert.ToInt32(ds.Tables[0].Rows[i]["InstituteID"].ToString());
-                    iobj.InstituteName = ds.Tables[0].Rows[i]["InstituteName"].ToString();
-                    iobj.InstituteDescription = ds.Tables[0].Rows[i]["InstituteDescription"].ToString();
-                    iobj.Address = ds.Tables[0].Rows[i]["Address"].ToString();
-                    iobj.City = ds.Tables[0].Rows[i]["City"].ToString();
+                    iobj.InstituteID = Convert.ToInt32(ds.Tables[0].Rows[i]["InstituteID"]);
+                    iobj.InstituteName = Convert.ToString(ds.Tables[0].Rows[i]["InstituteName"]);
+                    iobj.InstituteDescription = Convert.ToString(ds.Tables[0].Rows[i]["InstituteDescription"]);
+                    iobj.Address = Convert.ToString(ds.Tables[0].Rows[i]["Address"]);
+                    iobj.City = Convert.ToString(ds.Tables[0].Rows[i]["City"]);
                     iobj.StateId = Convert.ToInt32(ds.Tables[0].Rows[i]["StateId"]);
                     iobj.Phone = ds.Tables[0].Rows[i]["Phone"].ToString();
-                    iobj.Mobile = ds.Tables[0].Rows[i]["Mobile"].ToString();                    
-                    
+                    iobj.Mobile = ds.Tables[0].Rows[i]["Mobile"].ToString();
+                    iobj.Logo = Convert.ToString(ds.Tables[0].Rows[i]["Logo"]);     
                     iobj.EmailID = ds.Tables[0].Rows[i]["EmailID"].ToString();
                     StateDBHelper sdh = new StateDBHelper();
                     iobj.States = sdh.GetStates();
@@ -125,6 +126,7 @@ namespace Demo.Models.DBHelper
                 cmd.Parameters.AddWithValue("@Phone", objInst.Phone);
                 cmd.Parameters.AddWithValue("@Mobile", objInst.Mobile);
                 cmd.Parameters.AddWithValue("@EmailId", objInst.EmailID);
+                cmd.Parameters.AddWithValue("@InstituteLogo", objInst.Logo);
 
                 DataTable dt = new DataTable();
 

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Demo.Models.PaperCriteriaConfigViewModel>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExamTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstituteID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CandidateID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubjectID)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamTypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InstituteID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CandidateID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubjectID)
+        </td>
+       
+    </tr>
+}
+
+</table>
